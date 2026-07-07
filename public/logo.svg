@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" width="240" height="60">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffe699" />
+      <stop offset="50%" stop-color="#ffb954" />
+      <stop offset="100%" stop-color="#c4821a" />
+    </linearGradient>
+  </defs>
+  <!-- Baker icon / Chef hat + Wheat -->
+  <path d="M 30 18 C 22 18, 18 24, 22 30 C 18 36, 22 42, 30 42 C 38 42, 42 36, 38 30 C 42 24, 38 18, 30 18 Z" fill="url(#goldGrad)" opacity="0.8" />
+  <path d="M 24 38 L 36 38 L 36 44 L 24 44 Z" fill="url(#goldGrad)" />
+  <path d="M 28 44 L 32 44 L 32 46 L 28 46 Z" fill="url(#goldGrad)" />
+  <text x="55" y="35" font-family="Playfair Display, serif" font-size="20" font-weight="bold" fill="url(#goldGrad)" letter-spacing="1">The Cakes Floor</text>
+  <text x="55" y="46" font-family="Work Sans, sans-serif" font-size="8.5" font-weight="500" fill="#e5e2e0" letter-spacing="3.5">ARTISANAL BAKERY</text>
+</svg>

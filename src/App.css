@@ -1,0 +1,10 @@
+/* Reset any default App styling to prevent conflicts with custom index.css layout */
+#root {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  text-align: left !important;
+  border-inline: none !important;
+  min-height: 100vh !important;
+  display: block !important;
+}
