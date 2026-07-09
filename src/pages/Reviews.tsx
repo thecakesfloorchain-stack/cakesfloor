@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, MessageSquare } from 'lucide-react';
+import { Star, MessageSquare, X } from 'lucide-react';
 import { reviews, reviewsSummary } from '../data/reviews';
 import type { Review } from '../data/reviews';
 
@@ -17,7 +17,7 @@ const WhiteBox: React.FC<WhiteBoxProps> = ({ heading, text, imageSrc }) => {
       {/* Top Header Area: Full Width Image Frame with centered cake, object-cover scaling to fill the container */}
       <div className="flex-1 min-h-[200px] md:min-h-0 w-full mb-[18px] rounded-[2.5rem] flex items-center justify-center overflow-hidden">
         <img 
-          src={imageSrc} 
+          src={`${import.meta.env.BASE_URL}${imageSrc.replace(/^\//, '')}`} 
           alt={heading} 
           className="w-full h-full object-cover object-center"
         />
@@ -45,23 +45,30 @@ const WhiteBox: React.FC<WhiteBoxProps> = ({ heading, text, imageSrc }) => {
 // Module-level background style objects moved outside the component body
 const pinkSectionStyles = {
   backgroundColor: '#F8BDBE',
-  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.055'/%3E%3C/svg%3E")`,
+  backgroundImage: `url("${import.meta.env.BASE_URL}images/noise-tile.webp")`,
   backgroundRepeat: 'repeat'
 };
 
 const mintSectionStyles = {
   backgroundColor: '#ADEBB3',
-  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.055'/%3E%3C/svg%3E")`,
+  backgroundImage: `url("${import.meta.env.BASE_URL}images/noise-tile.webp")`,
   backgroundRepeat: 'repeat'
 };
 
 const beigeSectionStyles = {
   backgroundColor: '#D1B7E1',
-  backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.055'/%3E%3C/svg%3E")`,
+  backgroundImage: `url("${import.meta.env.BASE_URL}images/noise-tile.webp")`,
   backgroundRepeat: 'repeat'
 };
 
 export const Reviews: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+  const outlets = [
+    { name: "Bhandara Main Branch", address: "Zilla Parishad Square, Takiya Ward, Near Sai Mandir, Near, Ganeshpur, Bhandara, Maharashtra - 441904", placeId: "ChIJ45vTPpo5KzoRak6ZRefnnzs" },
+    { name: "Lakhani", address: "Gangotri Building, Murmadi, Lakhani, Maharashtra", placeId: "ChIJHQ3vizxpKzoRzvV6K5INjA4" },
+  ];
+
   const renderCard = (rev: Review, isCompact: boolean, theme: 'dark-overlay' | 'light-glass' | 'clear-glass') => {
     const initial = rev.firstName.charAt(0).toUpperCase();
     
@@ -138,7 +145,7 @@ export const Reviews: React.FC = () => {
   return (
     <div className="pt-24 pb-16 bg-[#0c0c0c] min-h-screen">
       {/* Combined Section: Header + Google Rating Summary */}
-      <section className="py-16 bg-gradient-to-b from-[#181817] to-background border-b border-white/5 relative">
+      <section className="py-16 bg-gradient-to-b from-[#181817] to-background border-b border-white/5 relative" style={{ contentVisibility: 'auto', containIntrinsicSize: 'auto 400px' }}>
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           {/* Left Column */}
           <div className="text-left space-y-4">
@@ -178,25 +185,23 @@ export const Reviews: React.FC = () => {
             </div>
 
             <div className="pt-2">
-              <a
-                href="https://search.google.com/local/writereview?placeid=ChIJpyqjOqtjKzoR5h5w5PAkXeg"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-primary text-on-primary font-body text-xs uppercase tracking-[0.2em] font-semibold px-8 py-3 rounded-full hover:brightness-110 active:scale-95 transition-all button-glow inline-flex items-center gap-2"
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="bg-primary text-on-primary font-body text-xs uppercase tracking-[0.2em] font-semibold px-8 py-3 rounded-full hover:brightness-110 active:scale-95 transition-all button-glow inline-flex items-center gap-2 cursor-pointer"
               >
                 <MessageSquare size={14} />
                 Rate Us on Google
-              </a>
+              </button>
             </div>
           </div>
         </div>
       </section>
 
       {/* Section 1: Image 1 Background */}
-      <section className="relative h-auto py-16 md:h-[85vh] md:py-12 flex flex-col justify-center items-center overflow-hidden bg-black border-y border-white/5">
+      <section className="relative h-auto py-16 md:h-[85vh] md:py-12 flex flex-col justify-center items-center overflow-hidden bg-black border-y border-white/5" style={{ contentVisibility: 'auto', containIntrinsicSize: 'auto 1000px' }}>
         <div className="absolute inset-0 z-0 bg-[#0c0c0c]">
           <img 
-            src="/images/review-bg-1.webp" 
+            src={`${import.meta.env.BASE_URL}images/review-bg-1.webp`} 
             alt="Review Background 1" 
             loading="eager"
             fetchPriority="high"
@@ -205,6 +210,8 @@ export const Reviews: React.FC = () => {
             height="1080"
             className="w-full h-full object-cover object-top opacity-100 pointer-events-none select-none"
           />
+          {/* Black overlay: 40% opacity on mobile only, transparent on desktop */}
+          <div className="absolute inset-0 bg-black/40 md:bg-transparent pointer-events-none" />
         </div>
         <div className="max-w-7xl mx-auto px-6 relative z-10 w-full flex flex-col justify-center items-center">
           <div className="flex flex-col gap-16 w-full">
@@ -227,7 +234,7 @@ export const Reviews: React.FC = () => {
       {/* Section 2: Beige Background */}
       <section
         className="relative h-auto py-16 md:h-[85vh] md:py-[18px] flex flex-col justify-center items-center overflow-hidden border-b border-[#30221a]/10"
-        style={beigeSectionStyles}
+        style={{ ...beigeSectionStyles, contentVisibility: 'auto', containIntrinsicSize: 'auto 1000px' }}
       >
         <div className="max-w-7xl mx-auto px-6 relative z-10 w-full flex flex-col justify-center items-center">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full items-stretch">
@@ -245,10 +252,10 @@ export const Reviews: React.FC = () => {
       </section>
 
       {/* Section 3: Image 2 Background */}
-      <section className="relative h-auto py-16 md:h-[85vh] md:py-12 flex flex-col justify-center items-center overflow-hidden bg-black border-b border-white/5">
+      <section className="relative h-auto py-16 md:h-[85vh] md:py-12 flex flex-col justify-center items-center overflow-hidden bg-black border-b border-white/5" style={{ contentVisibility: 'auto', containIntrinsicSize: 'auto 1000px' }}>
         <div className="absolute inset-0 z-0 bg-[#0c0c0c]">
           <img 
-            src="/images/review-bg-2.webp" 
+            src={`${import.meta.env.BASE_URL}images/review-bg-2.webp`} 
             alt="Review Background 2" 
             loading="lazy"
             decoding="async"
@@ -278,7 +285,7 @@ export const Reviews: React.FC = () => {
       {/* Section 4: Mint Background */}
       <section
         className="relative h-auto py-16 md:h-[85vh] md:py-[18px] flex flex-col justify-center items-center overflow-hidden border-b border-[#30221a]/10"
-        style={mintSectionStyles}
+        style={{ ...mintSectionStyles, contentVisibility: 'auto', containIntrinsicSize: 'auto 1000px' }}
       >
         <div className="max-w-7xl mx-auto px-6 relative z-10 w-full flex flex-col justify-center items-center">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full items-stretch">
@@ -297,7 +304,7 @@ export const Reviews: React.FC = () => {
 
       {/* Black & White Review Marquee Separator */}
       <div className="w-full overflow-hidden bg-black py-4 border-y border-white/10 relative z-20">
-        <div className="animate-marquee whitespace-nowrap flex gap-12">
+        <div className="animate-marquee whitespace-nowrap flex gap-12" style={{ willChange: 'transform' }}>
           <span
             className="text-sm sm:text-base uppercase flex items-center gap-12 text-white"
             style={{
@@ -341,7 +348,7 @@ export const Reviews: React.FC = () => {
       {/* Section 5: Bashful Pink Background */}
       <section
         className="relative h-auto py-16 md:h-[85vh] md:py-[18px] flex flex-col justify-center items-center overflow-hidden border-b border-[#30221a]/10"
-        style={pinkSectionStyles}
+        style={{ ...pinkSectionStyles, contentVisibility: 'auto', containIntrinsicSize: 'auto 1000px' }}
       >
         <div className="max-w-7xl mx-auto px-6 relative z-10 w-full flex flex-col justify-center items-center">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full items-stretch">
@@ -359,10 +366,10 @@ export const Reviews: React.FC = () => {
       </section>
 
       {/* Section 6: Image 4 Background */}
-      <section className="relative h-auto py-16 md:h-[85vh] md:py-12 flex flex-col justify-center items-center overflow-hidden bg-black border-b border-white/5">
+      <section className="relative h-auto py-16 md:h-[85vh] md:py-12 flex flex-col justify-center items-center overflow-hidden bg-black border-b border-white/5" style={{ contentVisibility: 'auto', containIntrinsicSize: 'auto 1000px' }}>
         <div className="absolute inset-0 z-0 bg-[#0c0c0c]">
           <img 
-            src="/images/review-bg-4.webp" 
+            src={`${import.meta.env.BASE_URL}images/review-bg-4.webp`} 
             alt="Review Background 4" 
             loading="lazy"
             decoding="async"
@@ -388,6 +395,60 @@ export const Reviews: React.FC = () => {
           </div>
         </div>
       </section>
+      {/* Outlet Selection Modal */}
+      {isModalOpen && (
+        <div 
+          className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setIsModalOpen(false);
+          }}
+        >
+          <div className="bg-[#160f0a] border border-[#30221a] rounded-[2.5rem] p-6 md:p-8 max-w-md w-full relative shadow-[0_24px_64px_rgba(0,0,0,0.8)] space-y-6 text-[#e5e2e0] animate-in fade-in zoom-in-95 duration-200">
+            {/* Close Button */}
+            <button 
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-5 right-5 text-[#e5e2e0]/60 hover:text-[#DFBA6B] hover:scale-110 transition-all cursor-pointer"
+              aria-label="Close modal"
+            >
+              <X size={20} />
+            </button>
+
+            {/* Header */}
+            <div className="space-y-2 text-center">
+              <h3 className="font-display text-2xl font-bold leading-tight text-white" style={{ fontFamily: "'Playfair Display', serif" }}>
+                Which outlet did you visit?
+              </h3>
+              <p className="font-body text-xs text-[#e5e2e0]/60 leading-relaxed font-light">
+                Select the store location you visited to leave your Google review.
+              </p>
+            </div>
+
+            {/* Outlet Options */}
+            <div className="space-y-3">
+              {outlets.map((outlet, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    window.open(`https://search.google.com/local/writereview?placeid=${outlet.placeId}`, '_blank', 'noopener,noreferrer');
+                    setIsModalOpen(false);
+                  }}
+                  className="w-full text-left p-4 rounded-2xl bg-black/35 hover:bg-white/5 border border-[#30221a] hover:border-[#DFBA6B]/50 transition-all cursor-pointer group space-y-1.5 shadow-md"
+                >
+                  <h4 
+                    className="font-display text-base font-bold text-[#DFBA6B] group-hover:text-[#ffb954] transition-colors"
+                    style={{ fontFamily: "'Playfair Display', serif", letterSpacing: "0.2px" }}
+                  >
+                    {outlet.name}
+                  </h4>
+                  <p className="font-body text-xs text-[#e5e2e0]/50 leading-relaxed font-light">
+                    {outlet.address}
+                  </p>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -98,7 +98,7 @@ function App() {
 
     imagesToPreload.forEach((src) => {
       const img = new Image();
-      img.src = src;
+      img.src = `${import.meta.env.BASE_URL}${src.replace(/^\//, '')}`;
     });
   }, [introCompleted]);
 

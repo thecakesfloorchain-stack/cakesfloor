@@ -157,7 +157,7 @@ export const Home: React.FC = () => {
   return (
     <div ref={containerRef} className="overflow-hidden">
       {/* 1. Hero Section */}
-      <section className="relative h-[calc(100vh-54px)] flex items-start md:items-center pt-[90px] md:pt-24 overflow-hidden bg-[#0c0c0c]">
+      <section className="relative h-[calc(100vh-54px)] flex items-center pt-16 md:pt-24 overflow-hidden bg-[#0c0c0c]">
         {/* Background Slide (Uses absolute images inside animated motion containers for proper LCP optimization) */}
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
@@ -174,7 +174,7 @@ export const Home: React.FC = () => {
             className="absolute inset-0 z-0 overflow-hidden"
           >
             <img 
-              src={slides[currentSlide].image} 
+              src={`${import.meta.env.BASE_URL}${slides[currentSlide].image.replace(/^\//, '')}`} 
               alt="" 
               className="w-full h-full object-cover"
               loading={currentSlide === 0 ? "eager" : "lazy"}
@@ -187,7 +187,7 @@ export const Home: React.FC = () => {
         {/* Overlay to dim background brightness */}
         <div className="absolute inset-0 bg-black/50 z-0 pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto px-6 flex flex-col items-center justify-start md:justify-center text-center w-full z-10 py-8 pt-5 md:pt-8">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col items-center justify-center text-center w-full z-10 py-8 pt-5 md:pt-8">
           {/* Centered Text Block */}
           <AnimatePresence mode="wait">
             <motion.div
@@ -230,38 +230,38 @@ export const Home: React.FC = () => {
               )}
             </motion.div>
           </AnimatePresence>
-        </div>
 
-        {/* Navigation Controls */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-4 bg-black/45 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full shadow-lg">
-          <button 
-            onClick={prevSlide}
-            className="w-8 h-8 rounded-full flex items-center justify-center text-white/80 hover:text-primary transition-colors hover:bg-white/5 active:scale-90"
-            aria-label="Previous Slide"
-          >
-            <ArrowLeft size={16} />
-          </button>
-          
-          <div className="flex gap-1.5">
-            {slides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setPage([index, index > currentSlide ? 1 : -1])}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  currentSlide === index ? 'bg-primary w-4' : 'bg-white/30 hover:bg-white/50'
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
+          {/* Navigation Controls */}
+          <div className="md:absolute md:bottom-6 md:left-1/2 md:-translate-x-1/2 z-20 flex items-center gap-4 bg-black/45 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full shadow-lg relative mt-5 md:mt-0">
+            <button 
+              onClick={prevSlide}
+              className="w-8 h-8 rounded-full flex items-center justify-center text-white/80 hover:text-primary transition-colors hover:bg-white/5 active:scale-90"
+              aria-label="Previous Slide"
+            >
+              <ArrowLeft size={16} />
+            </button>
+            
+            <div className="flex gap-1.5">
+              {slides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setPage([index, index > currentSlide ? 1 : -1])}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    currentSlide === index ? 'bg-primary w-4' : 'bg-white/30 hover:bg-white/50'
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+            
+            <button 
+              onClick={nextSlide}
+              className="w-8 h-8 rounded-full flex items-center justify-center text-white/80 hover:text-primary transition-colors hover:bg-white/5 active:scale-90"
+              aria-label="Next Slide"
+            >
+              <ArrowRight size={16} />
+            </button>
           </div>
-          
-          <button 
-            onClick={nextSlide}
-            className="w-8 h-8 rounded-full flex items-center justify-center text-white/80 hover:text-primary transition-colors hover:bg-white/5 active:scale-90"
-            aria-label="Next Slide"
-          >
-            <ArrowRight size={16} />
-          </button>
         </div>
       </section>
 
@@ -308,7 +308,7 @@ export const Home: React.FC = () => {
             {/* Image 1 */}
             <div className="w-full h-[360px] md:h-[500px] rounded-2xl overflow-hidden shadow-[0_12px_32px_rgba(0,0,0,0.15)] border border-neutral-350 bg-white/20 transition-transform duration-500 hover:scale-105">
               <img 
-                src="/images/teaser-cake-1.webp" 
+                src={`${import.meta.env.BASE_URL}images/teaser-cake-1.webp`} 
                 alt="Butterfly Custom Cake" 
                 className="w-full h-full object-cover"
                 loading="lazy"
@@ -318,7 +318,7 @@ export const Home: React.FC = () => {
             {/* Image 2 */}
             <div className="w-full h-[360px] md:h-[500px] rounded-2xl overflow-hidden shadow-[0_12px_32px_rgba(0,0,0,0.15)] border border-neutral-350 bg-white/20 transition-transform duration-500 hover:scale-105">
               <img 
-                src="/images/teaser-cake-2.webp" 
+                src={`${import.meta.env.BASE_URL}images/teaser-cake-2.webp`} 
                 alt="Superhero Avengers Custom Cake" 
                 className="w-full h-full object-cover"
                 loading="lazy"
@@ -328,7 +328,7 @@ export const Home: React.FC = () => {
             {/* Image 3 */}
             <div className="w-full h-[360px] md:h-[500px] rounded-2xl overflow-hidden shadow-[0_12px_32px_rgba(0,0,0,0.15)] border border-neutral-350 bg-white/20 transition-transform duration-500 hover:scale-105">
               <img 
-                src="/images/teaser-cake-3.webp" 
+                src={`${import.meta.env.BASE_URL}images/teaser-cake-3.webp`} 
                 alt="Lamborghini Sports Car Custom Cake" 
                 className="w-full h-full object-cover"
                 loading="lazy"
@@ -385,7 +385,7 @@ export const Home: React.FC = () => {
                 {/* Image Header */}
                 <div className="h-48 w-full overflow-hidden relative bg-neutral-900 border-b border-white/5">
                   <img 
-                    src={item.image} 
+                    src={`${import.meta.env.BASE_URL}${item.image.replace(/^\//, '')}`} 
                     alt={item.name} 
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
@@ -432,7 +432,7 @@ export const Home: React.FC = () => {
           <div
             className="w-full h-full bg-cover bg-center opacity-100 transition-opacity duration-500 bg-[#0c0c0c]"
             style={{
-              backgroundImage: "url('/images/usp-bg.webp')",
+              backgroundImage: "url('" + import.meta.env.BASE_URL + "images/usp-bg.webp')",
               backgroundAttachment: 'scroll'
             }}
           />
@@ -547,7 +547,7 @@ export const Home: React.FC = () => {
           <div className="flex items-center justify-start h-full">
             <div className="relative w-full max-w-[580px] aspect-[1000/590] overflow-hidden select-none border border-neutral-100 shadow-[0_8px_30px_rgba(0,0,0,0.02)]">
               <img 
-                src="/images/instagram-profile.webp" 
+                src={`${import.meta.env.BASE_URL}images/instagram-profile.webp`} 
                 alt="The Cakes Floor Instagram Profile" 
                 className="w-full h-full object-cover"
                 loading="lazy"

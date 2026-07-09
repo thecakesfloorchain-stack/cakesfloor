@@ -95,8 +95,20 @@ export const Contact: React.FC = () => {
     e.preventDefault();
     if (!formData.name || !formData.phone) return;
 
-    // In a real application, you would submit to an API endpoint here.
-    // For now, we simulate a successful form submission.
+    const whatsappNumber = '917887324373';
+    const messageTemplate = 
+`*New Cake Enquiry from Website*
+----------------------------------
+*Name:* ${formData.name}
+*Phone:* ${formData.phone}
+*Details / Message:* 
+${formData.message || 'No additional details provided.'}`;
+
+    const encodedMessage = encodeURIComponent(messageTemplate);
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+
     setFormSubmitted(true);
     setFormData({ name: '', phone: '', message: '' });
   };
@@ -139,24 +151,15 @@ export const Contact: React.FC = () => {
                 <div className="space-y-5 font-body text-xs md:text-sm text-[#e5e2e0]/70 font-light">
                   <div>
                     <p className="font-semibold text-[#e5e2e0]">Bhandara — Zilla Parishad Square (Main Branch)</p>
-                    <p className="leading-relaxed">Zilla Parishad Square, near Sai Mandir, Khat Road, Bhandara, Maharashtra</p>
+                    <p className="leading-relaxed">Zilla Parishad Square, Takiya Ward, Near Sai Mandir, Near, Ganeshpur, Bhandara, Maharashtra - 441904</p>
                     <button
-                      onClick={() => handleGetDirections("The Cakes Floor, near Sai Mandir, Khat Road, Bhandara")}
+                      onClick={() => handleGetDirections("The Cakes Floor, Zilla Parishad Square, Takiya Ward, Near Sai Mandir, Near, Ganeshpur, Bhandara")}
                       className="text-primary hover:underline text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 mt-1.5 cursor-pointer"
                     >
                       <Compass size={12} /> Get Directions
                     </button>
                   </div>
-                  <div>
-                    <p className="font-semibold text-[#e5e2e0]">Bhandara — Shastrinagar</p>
-                    <p className="leading-relaxed">Near Bank of India ATM, Khat Road, Shastrinagar, Bhandara, Maharashtra - 441904</p>
-                    <button
-                      onClick={() => handleGetDirections("The Cakes Floor, near Bank of India ATM, Khat Road, Shastrinagar, Bhandara")}
-                      className="text-primary hover:underline text-xs font-semibold uppercase tracking-wider flex items-center gap-1.5 mt-1.5 cursor-pointer"
-                    >
-                      <Compass size={12} /> Get Directions
-                    </button>
-                  </div>
+
                   <div>
                     <p className="font-semibold text-[#e5e2e0]">Lakhani</p>
                     <p className="leading-relaxed">Gangotri Building, Murmadi, Lakhani, Maharashtra</p>

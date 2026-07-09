@@ -47,10 +47,9 @@ export const TermsOfService: React.FC = () => {
 
         <div className="space-y-4">
           <h2 className="font-display text-2xl font-semibold text-on-surface">Our Branches</h2>
-          <p>The Cakes Floor operates three branches:</p>
+          <p>The Cakes Floor operates two branches:</p>
           <ul className="list-disc list-inside pl-4 space-y-2">
-            <li>Bhandara — Zilla Parishad Square: near Sai Mandir, Khat Road, Bhandara, Maharashtra</li>
-            <li>Bhandara — Shastrinagar: near Bank of India ATM, Khat Road, Shastrinagar, Bhandara, Maharashtra 441904</li>
+            <li>Bhandara — Zilla Parishad Square: Zilla Parishad Square, Takiya Ward, Near Sai Mandir, Near, Ganeshpur, Bhandara, Maharashtra - 441904</li>
             <li>Lakhani: Gangotri Building, Murmadi, Lakhani, Maharashtra</li>
           </ul>
         </div>
@@ -101,7 +100,7 @@ export const TermsOfService: React.FC = () => {
           <h2 className="font-display text-2xl font-semibold text-on-surface">Contact Us</h2>
           <p>For questions regarding these Terms of Service, please contact us:</p>
           <ul className="list-disc list-inside pl-4 space-y-2">
-            <li>Phone: +91 98765 43210</li>
+            <li>Phone: +91 78873 24373</li>
           </ul>
         </div>
       </section>

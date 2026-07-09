@@ -148,7 +148,7 @@ export const IntroAnimation: React.FC<IntroAnimationProps> = ({ onComplete }) =>
           style={{ transformOrigin: "center center", backfaceVisibility: "hidden" }}
         >
           <img 
-            src="/logo.png" 
+            src={`${import.meta.env.BASE_URL}logo.png`} 
             alt="The Cakes Floor Logo" 
             className="h-20 w-20 sm:h-28 sm:w-28 md:h-44 md:w-44 object-contain" 
           />

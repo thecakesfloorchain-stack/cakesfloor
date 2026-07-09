@@ -76,7 +76,7 @@ export const Gallery: React.FC = () => {
               {/* Premium image container with hover zoom effect */}
               <div className="h-full w-full overflow-hidden">
                 <img
-                  src={src}
+                  src={`${import.meta.env.BASE_URL}${src.replace(/^\//, '')}`}
                   alt={`Signature Creation ${index + 1}`}
                   className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   loading={index < 6 ? 'eager' : 'lazy'}

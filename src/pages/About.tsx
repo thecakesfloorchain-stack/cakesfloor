@@ -61,7 +61,7 @@ export const About: React.FC = () => {
 
         <div className="relative h-[400px] lg:h-[500px] rounded-2xl overflow-hidden border border-white/5 shadow-2xl bg-neutral-900">
           <img
-            src="/images/aboutus-img.webp"
+            src={`${import.meta.env.BASE_URL}images/aboutus-img.webp`}
             alt="The Cakes Floor Coffee Area"
             className="w-full h-full object-cover"
             loading="eager"
@@ -127,7 +127,7 @@ export const About: React.FC = () => {
           {/* Right Column: Big Image Box */}
           <div className="relative h-[400px] lg:h-[500px] rounded-2xl overflow-hidden border border-white/5 shadow-2xl bg-neutral-900">
             <img
-              src="/images/aboutus-img2.webp"
+              src={`${import.meta.env.BASE_URL}images/aboutus-img2.webp`}
               alt="The Cakes Floor Signage Wall"
               className="w-full h-full object-cover"
               loading="eager"

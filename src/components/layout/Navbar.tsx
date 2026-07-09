@@ -110,7 +110,7 @@ export const Navbar: React.FC<NavbarProps> = ({ introCompleted }) => {
             }`}
           >
             <img 
-              src="/logo.png" 
+              src={`${import.meta.env.BASE_URL}logo.png`} 
               alt="The Cakes Floor Logo" 
               className={`transition-all duration-300 object-contain ${scrolled ? 'h-12' : 'h-16'}`} 
             />

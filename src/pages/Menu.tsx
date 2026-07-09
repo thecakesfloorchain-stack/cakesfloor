@@ -146,7 +146,7 @@ export const Menu: React.FC = () => {
                 {/* Image Header */}
                 <div className="h-44 w-full overflow-hidden relative bg-neutral-900 border-b border-white/5">
                   <img 
-                    src={item.image} 
+                    src={`${import.meta.env.BASE_URL}${item.image.replace(/^\//, '')}`} 
                     alt={item.name} 
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"

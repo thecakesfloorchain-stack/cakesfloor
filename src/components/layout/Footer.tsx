@@ -9,7 +9,7 @@ export const Footer: React.FC = () => {
         {/* Column 1: Brand Info */}
         <div className="space-y-4">
           <Link to="/" className="flex items-center gap-3 w-fit select-none">
-            <img src="/logo.png" alt="The Cakes Floor Logo" className="h-14 w-auto object-contain" loading="lazy" />
+            <img src={`${import.meta.env.BASE_URL}logo.png`} alt="The Cakes Floor Logo" className="h-14 w-auto object-contain" loading="lazy" />
             <div className="flex flex-col justify-center gap-0 leading-[0.85] font-display h-14">
               <span 
                 className="font-extrabold tracking-[0.08em] text-white text-glow uppercase text-xs" 
@@ -105,7 +105,7 @@ export const Footer: React.FC = () => {
           <ul className="space-y-4 font-body text-sm font-light text-[#e5e2e0]/60">
             <li className="flex items-start gap-3">
               <MapPin size={18} className="text-primary shrink-0 mt-0.5" />
-              <span>Zilla Parishad Square, near Sai Mandir, Khat Road, Bhandara, Maharashtra - 441904</span>
+              <span>Zilla Parishad Square, Takiya Ward, Near Sai Mandir, Near, Ganeshpur, Bhandara, Maharashtra - 441904</span>
             </li>
             <li className="flex items-center gap-3">
               <Phone size={18} className="text-primary shrink-0" />

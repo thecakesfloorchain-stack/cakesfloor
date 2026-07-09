@@ -91,10 +91,9 @@ export const PrivacyPolicy: React.FC = () => {
           <h2 className="font-display text-2xl font-semibold text-on-surface">Contact Us</h2>
           <p>If you have questions about this Privacy Policy, please contact us:</p>
           <ul className="list-disc list-inside pl-4 space-y-2">
-            <li>Phone: +91 98765 43210</li>
-            <li>Branch 1 (Bhandara): Zilla Parishad Square, near Sai Mandir, Khat Road, Bhandara, Maharashtra</li>
-            <li>Branch 2 (Bhandara): Near Bank of India ATM, Khat Road, Shastrinagar, Bhandara, Maharashtra 441904</li>
-            <li>Branch 3 (Lakhani): Gangotri Building, Murmadi, Lakhani, Maharashtra</li>
+            <li>Phone: +91 78873 24373</li>
+            <li>Branch 1 (Bhandara): Zilla Parishad Square, Takiya Ward, Near Sai Mandir, Near, Ganeshpur, Bhandara, Maharashtra - 441904</li>
+            <li>Branch 2 (Lakhani): Gangotri Building, Murmadi, Lakhani, Maharashtra</li>
           </ul>
         </div>
       </section>
