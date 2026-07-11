@@ -439,10 +439,10 @@ export const Contact: React.FC = () => {
                       name="orderType"
                       value={formData.orderType}
                       onChange={handleInputChange}
-                      className="w-full bg-[#1e1511] border border-white/10 rounded-xl px-4 py-3.5 text-[#e5e2e0] focus:border-primary focus:outline-none transition-colors"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[#e5e2e0] focus:border-primary focus:outline-none transition-colors cursor-pointer"
                     >
-                      <option value="Self-Pickup">Self-Pickup</option>
-                      <option value="Delivery">Delivery</option>
+                      <option value="Self-Pickup" className="bg-[#1e1511] text-[#e5e2e0]">Self-Pickup</option>
+                      <option value="Delivery" className="bg-[#1e1511] text-[#e5e2e0]">Delivery</option>
                     </select>
                   </div>
 
@@ -456,7 +456,7 @@ export const Contact: React.FC = () => {
                       name="preferredDate"
                       value={formData.preferredDate}
                       onChange={handleInputChange}
-                      className="w-full bg-[#1e1511] border border-white/10 rounded-xl px-4 py-3 text-[#e5e2e0] focus:border-primary focus:outline-none transition-colors"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[#e5e2e0] focus:border-primary focus:outline-none transition-colors"
                     />
                   </div>
 
@@ -469,12 +469,12 @@ export const Contact: React.FC = () => {
                       name="timeSlot"
                       value={formData.timeSlot}
                       onChange={handleInputChange}
-                      className="w-full bg-[#1e1511] border border-white/10 rounded-xl px-4 py-3.5 text-[#e5e2e0] focus:border-primary focus:outline-none transition-colors"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[#e5e2e0] focus:border-primary focus:outline-none transition-colors cursor-pointer"
                     >
-                      <option value="Morning (9am–12pm)">Morning (9am–12pm)</option>
-                      <option value="Afternoon (12pm–4pm)">Afternoon (12pm–4pm)</option>
-                      <option value="Evening (4pm–8pm)">Evening (4pm–8pm)</option>
-                      <option value="Specific Time (mention in special instructions)">Specific Time (mention below)</option>
+                      <option value="Morning (9am–12pm)" className="bg-[#1e1511] text-[#e5e2e0]">Morning (9am–12pm)</option>
+                      <option value="Afternoon (12pm–4pm)" className="bg-[#1e1511] text-[#e5e2e0]">Afternoon (12pm–4pm)</option>
+                      <option value="Evening (4pm–8pm)" className="bg-[#1e1511] text-[#e5e2e0]">Evening (4pm–8pm)</option>
+                      <option value="Specific Time (mention in special instructions)" className="bg-[#1e1511] text-[#e5e2e0]">Specific Time (mention below)</option>
                     </select>
                   </div>
                 </div>
@@ -527,14 +527,14 @@ export const Contact: React.FC = () => {
                       name="weight"
                       value={formData.weight}
                       onChange={handleInputChange}
-                      className="w-full bg-[#1e1511] border border-white/10 rounded-xl px-4 py-3.5 text-[#e5e2e0] focus:border-primary focus:outline-none transition-colors"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[#e5e2e0] focus:border-primary focus:outline-none transition-colors cursor-pointer"
                     >
-                      <option value="250g">250g</option>
-                      <option value="500g">500g</option>
-                      <option value="1kg">1kg</option>
-                      <option value="1.5kg">1.5kg</option>
-                      <option value="2kg">2kg</option>
-                      <option value="Custom (specify in cake details)">Custom (specify in details)</option>
+                      <option value="250g" className="bg-[#1e1511] text-[#e5e2e0]">250g</option>
+                      <option value="500g" className="bg-[#1e1511] text-[#e5e2e0]">500g</option>
+                      <option value="1kg" className="bg-[#1e1511] text-[#e5e2e0]">1kg</option>
+                      <option value="1.5kg" className="bg-[#1e1511] text-[#e5e2e0]">1.5kg</option>
+                      <option value="2kg" className="bg-[#1e1511] text-[#e5e2e0]">2kg</option>
+                      <option value="Custom (specify in cake details)" className="bg-[#1e1511] text-[#e5e2e0]">Custom (specify in details)</option>
                     </select>
                   </div>
 
@@ -547,12 +547,12 @@ export const Contact: React.FC = () => {
                       name="quantity"
                       value={formData.quantity}
                       onChange={handleInputChange}
-                      className="w-full bg-[#1e1511] border border-white/10 rounded-xl px-4 py-3.5 text-[#e5e2e0] focus:border-primary focus:outline-none transition-colors"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[#e5e2e0] focus:border-primary focus:outline-none transition-colors cursor-pointer"
                     >
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="More than 3">More than 3</option>
+                      <option value="1" className="bg-[#1e1511] text-[#e5e2e0]">1</option>
+                      <option value="2" className="bg-[#1e1511] text-[#e5e2e0]">2</option>
+                      <option value="3" className="bg-[#1e1511] text-[#e5e2e0]">3</option>
+                      <option value="More than 3" className="bg-[#1e1511] text-[#e5e2e0]">More than 3</option>
                     </select>
                   </div>
 
@@ -565,10 +565,10 @@ export const Contact: React.FC = () => {
                       name="eggPreference"
                       value={formData.eggPreference}
                       onChange={handleInputChange}
-                      className="w-full bg-[#1e1511] border border-white/10 rounded-xl px-4 py-3.5 text-[#e5e2e0] focus:border-primary focus:outline-none transition-colors"
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[#e5e2e0] focus:border-primary focus:outline-none transition-colors cursor-pointer"
                     >
-                      <option value="Eggless">Eggless</option>
-                      <option value="With Egg">With Egg</option>
+                      <option value="Eggless" className="bg-[#1e1511] text-[#e5e2e0]">Eggless</option>
+                      <option value="With Egg" className="bg-[#1e1511] text-[#e5e2e0]">With Egg</option>
                     </select>
                   </div>
                 </div>
@@ -583,10 +583,10 @@ export const Contact: React.FC = () => {
                     name="isSurprise"
                     value={formData.isSurprise}
                     onChange={handleInputChange}
-                    className="w-full bg-[#1e1511] border border-white/10 rounded-xl px-4 py-3.5 text-[#e5e2e0] focus:border-primary focus:outline-none transition-colors"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[#e5e2e0] focus:border-primary focus:outline-none transition-colors cursor-pointer"
                   >
-                    <option value="No">No</option>
-                    <option value="Yes">Yes</option>
+                    <option value="No" className="bg-[#1e1511] text-[#e5e2e0]">No</option>
+                    <option value="Yes" className="bg-[#1e1511] text-[#e5e2e0]">Yes</option>
                   </select>
                 </div>
 
