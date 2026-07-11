@@ -10,7 +10,21 @@ export const Contact: React.FC = () => {
     name: '',
     phone: '',
     message: '',
+    deliveryAddress: '',
+    pincode: '',
+    preferredDate: '',
+    nameOnCake: '',
+    specialInstructions: '',
+    alternatePhone: '',
+    orderType: 'Self-Pickup',
+    weight: '500g',
+    quantity: '1',
+    eggPreference: 'Eggless',
+    timeSlot: 'Morning (9am–12pm)',
+    isSurprise: 'No',
+    addOns: [] as string[],
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   // Calculate live open/closed status (10:00 AM to 10:30 PM)
   useEffect(() => {
@@ -83,34 +97,130 @@ export const Contact: React.FC = () => {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
+    if (errors[name]) {
+      setErrors((prev) => {
+        const next = { ...prev };
+        delete next[name];
+        return next;
+      });
+    }
+  };
+
+  const handleCheckboxChange = (addonName: string) => {
+    setFormData((prev) => {
+      let updatedAddOns = [...prev.addOns];
+      if (addonName === 'None') {
+        if (updatedAddOns.includes('None')) {
+          updatedAddOns = [];
+        } else {
+          updatedAddOns = ['None'];
+        }
+      } else {
+        updatedAddOns = updatedAddOns.filter((item) => item !== 'None');
+        if (updatedAddOns.includes(addonName)) {
+          updatedAddOns = updatedAddOns.filter((item) => item !== addonName);
+        } else {
+          updatedAddOns.push(addonName);
+        }
+      }
+      return {
+        ...prev,
+        addOns: updatedAddOns,
+      };
+    });
+  };
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+    if (!formData.name.trim()) newErrors.name = 'Name is required';
+    if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
+    if (!formData.message.trim()) newErrors.message = 'Cake details/message is required';
+    if (!formData.weight) newErrors.weight = 'Weight is required';
+    if (!formData.quantity) newErrors.quantity = 'Quantity is required';
+    if (!formData.orderType) newErrors.orderType = 'Order type is required';
+    
+    if (formData.orderType === 'Delivery') {
+      if (!formData.deliveryAddress.trim()) newErrors.deliveryAddress = 'Delivery address is required for delivery';
+      if (!formData.pincode.trim()) newErrors.pincode = 'Pin Code / Area is required for delivery';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.phone) return;
+    if (!validateForm()) return;
 
     const whatsappNumber = '917887324373';
-    const messageTemplate = 
-`*New Cake Enquiry from Website*
-----------------------------------
-*Name:* ${formData.name}
-*Phone:* ${formData.phone}
-*Details / Message:* 
-${formData.message || 'No additional details provided.'}`;
-
+    
+    const lines: string[] = [];
+    lines.push('*New Cake Enquiry*');
+    lines.push(`Name: ${formData.name.trim()}`);
+    lines.push(`Phone: ${formData.phone.trim()}`);
+    if (formData.alternatePhone.trim()) {
+      lines.push(`Alternate Phone: ${formData.alternatePhone.trim()}`);
+    }
+    lines.push(`Cake Details: ${formData.message.trim()}`);
+    lines.push(`Weight: ${formData.weight}`);
+    lines.push(`Quantity: ${formData.quantity}`);
+    lines.push(`Egg Preference: ${formData.eggPreference}`);
+    
+    if (formData.nameOnCake.trim()) {
+      lines.push(`Name on Cake: ${formData.nameOnCake.trim()}`);
+    }
+    
+    const addonsStr = formData.addOns.length > 0 ? formData.addOns.join(', ') : 'None';
+    lines.push(`Add-ons: ${addonsStr}`);
+    
+    lines.push(`Order Type: ${formData.orderType}`);
+    if (formData.orderType === 'Delivery') {
+      lines.push(`Delivery Address: ${formData.deliveryAddress.trim()}`);
+      lines.push(`Pin Code/Area: ${formData.pincode.trim()}`);
+    }
+    
+    if (formData.preferredDate) {
+      lines.push(`Preferred Date: ${formData.preferredDate}`);
+    }
+    lines.push(`Preferred Time: ${formData.timeSlot}`);
+    lines.push(`Surprise Order: ${formData.isSurprise}`);
+    
+    if (formData.specialInstructions.trim()) {
+      lines.push(`Special Instructions: ${formData.specialInstructions.trim()}`);
+    }
+    
+    const messageTemplate = lines.join('\n');
     const encodedMessage = encodeURIComponent(messageTemplate);
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
 
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
 
     setFormSubmitted(true);
-    setFormData({ name: '', phone: '', message: '' });
+    setFormData({
+      name: '',
+      phone: '',
+      message: '',
+      deliveryAddress: '',
+      pincode: '',
+      preferredDate: '',
+      nameOnCake: '',
+      specialInstructions: '',
+      alternatePhone: '',
+      orderType: 'Self-Pickup',
+      weight: '500g',
+      quantity: '1',
+      eggPreference: 'Eggless',
+      timeSlot: 'Morning (9am–12pm)',
+      isSurprise: 'No',
+      addOns: [],
+    });
+    setErrors({});
   };
 
   return (
@@ -250,61 +360,297 @@ ${formData.message || 'No additional details provided.'}`;
                 </button>
               </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4 text-left font-body text-sm">
-                <div>
-                  <label htmlFor="name" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-2">
-                    Name *
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[#e5e2e0] placeholder-[#e5e2e0]/20 focus:border-primary focus:outline-none transition-colors"
-                    placeholder="Enter your name"
-                  />
+              <form onSubmit={handleSubmit} noValidate className="space-y-5 text-left font-body text-sm">
+                {/* 1. Name & Phone & Alternate Phone */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="name" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-2">
+                      Name *
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className={`w-full bg-white/5 border ${errors.name ? 'border-red-500' : 'border-white/10'} rounded-xl px-4 py-3 text-[#e5e2e0] placeholder-[#e5e2e0]/20 focus:border-primary focus:outline-none transition-colors`}
+                      placeholder="Enter your name"
+                    />
+                    {errors.name && <p className="text-red-400 text-xs mt-1">{errors.name}</p>}
+                  </div>
+
+                  <div>
+                    <label htmlFor="phone" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-2">
+                      Phone Number *
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className={`w-full bg-white/5 border ${errors.phone ? 'border-red-500' : 'border-white/10'} rounded-xl px-4 py-3 text-[#e5e2e0] placeholder-[#e5e2e0]/20 focus:border-primary focus:outline-none transition-colors`}
+                      placeholder="Enter your mobile number"
+                    />
+                    {errors.phone && <p className="text-red-400 text-xs mt-1">{errors.phone}</p>}
+                  </div>
                 </div>
 
-                <div>
-                  <label htmlFor="phone" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-2">
-                    Phone Number *
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    required
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[#e5e2e0] placeholder-[#e5e2e0]/20 focus:border-primary focus:outline-none transition-colors"
-                    placeholder="Enter your mobile number"
-                  />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="alternatePhone" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-2">
+                      Alternate Phone Number (Optional)
+                    </label>
+                    <input
+                      type="tel"
+                      id="alternatePhone"
+                      name="alternatePhone"
+                      value={formData.alternatePhone}
+                      onChange={handleInputChange}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[#e5e2e0] placeholder-[#e5e2e0]/20 focus:border-primary focus:outline-none transition-colors"
+                      placeholder="Enter alternate number"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="nameOnCake" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-2">
+                      Name to be written on cake (Optional)
+                    </label>
+                    <input
+                      type="text"
+                      id="nameOnCake"
+                      name="nameOnCake"
+                      value={formData.nameOnCake}
+                      onChange={handleInputChange}
+                      className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[#e5e2e0] placeholder-[#e5e2e0]/20 focus:border-primary focus:outline-none transition-colors"
+                      placeholder="Leave blank if not needed"
+                    />
+                  </div>
                 </div>
 
+                {/* 2. Order Type, Preferred Date, Preferred Time Slot */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label htmlFor="orderType" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-2">
+                      Order Type *
+                    </label>
+                    <select
+                      id="orderType"
+                      name="orderType"
+                      value={formData.orderType}
+                      onChange={handleInputChange}
+                      className="w-full bg-[#1e1511] border border-white/10 rounded-xl px-4 py-3.5 text-[#e5e2e0] focus:border-primary focus:outline-none transition-colors"
+                    >
+                      <option value="Self-Pickup">Self-Pickup</option>
+                      <option value="Delivery">Delivery</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label htmlFor="preferredDate" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-2">
+                      Preferred Date (Optional)
+                    </label>
+                    <input
+                      type="date"
+                      id="preferredDate"
+                      name="preferredDate"
+                      value={formData.preferredDate}
+                      onChange={handleInputChange}
+                      className="w-full bg-[#1e1511] border border-white/10 rounded-xl px-4 py-3 text-[#e5e2e0] focus:border-primary focus:outline-none transition-colors"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="timeSlot" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-2">
+                      Preferred Time Slot *
+                    </label>
+                    <select
+                      id="timeSlot"
+                      name="timeSlot"
+                      value={formData.timeSlot}
+                      onChange={handleInputChange}
+                      className="w-full bg-[#1e1511] border border-white/10 rounded-xl px-4 py-3.5 text-[#e5e2e0] focus:border-primary focus:outline-none transition-colors"
+                    >
+                      <option value="Morning (9am–12pm)">Morning (9am–12pm)</option>
+                      <option value="Afternoon (12pm–4pm)">Afternoon (12pm–4pm)</option>
+                      <option value="Evening (4pm–8pm)">Evening (4pm–8pm)</option>
+                      <option value="Specific Time (mention in special instructions)">Specific Time (mention below)</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* 3. Delivery Details (Shown conditionally if Order Type is Delivery) */}
+                {formData.orderType === 'Delivery' && (
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4 animate-in fade-in slide-in-from-top-2 duration-200">
+                    <div className="md:col-span-3">
+                      <label htmlFor="deliveryAddress" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-2">
+                        Delivery Address *
+                      </label>
+                      <textarea
+                        id="deliveryAddress"
+                        name="deliveryAddress"
+                        rows={2}
+                        value={formData.deliveryAddress}
+                        onChange={handleInputChange}
+                        className={`w-full bg-white/5 border ${errors.deliveryAddress ? 'border-red-500' : 'border-white/10'} rounded-xl px-4 py-3 text-[#e5e2e0] placeholder-[#e5e2e0]/20 focus:border-primary focus:outline-none transition-colors resize-none`}
+                        placeholder="Enter full delivery address"
+                      />
+                      {errors.deliveryAddress && <p className="text-red-400 text-xs mt-1">{errors.deliveryAddress}</p>}
+                    </div>
+
+                    <div className="md:col-span-1">
+                      <label htmlFor="pincode" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-2">
+                        Pin Code / Area *
+                      </label>
+                      <input
+                        type="text"
+                        id="pincode"
+                        name="pincode"
+                        value={formData.pincode}
+                        onChange={handleInputChange}
+                        className={`w-full bg-white/5 border ${errors.pincode ? 'border-red-500' : 'border-white/10'} rounded-xl px-4 py-3 text-[#e5e2e0] placeholder-[#e5e2e0]/20 focus:border-primary focus:outline-none transition-colors`}
+                        placeholder="441904"
+                      />
+                      {errors.pincode && <p className="text-red-400 text-xs mt-1">{errors.pincode}</p>}
+                    </div>
+                  </div>
+                )}
+
+                {/* 4. Cake Weight, Quantity, and Egg Preference */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label htmlFor="weight" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-2">
+                      Cake Weight *
+                    </label>
+                    <select
+                      id="weight"
+                      name="weight"
+                      value={formData.weight}
+                      onChange={handleInputChange}
+                      className="w-full bg-[#1e1511] border border-white/10 rounded-xl px-4 py-3.5 text-[#e5e2e0] focus:border-primary focus:outline-none transition-colors"
+                    >
+                      <option value="250g">250g</option>
+                      <option value="500g">500g</option>
+                      <option value="1kg">1kg</option>
+                      <option value="1.5kg">1.5kg</option>
+                      <option value="2kg">2kg</option>
+                      <option value="Custom (specify in cake details)">Custom (specify in details)</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label htmlFor="quantity" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-2">
+                      Cake Quantity *
+                    </label>
+                    <select
+                      id="quantity"
+                      name="quantity"
+                      value={formData.quantity}
+                      onChange={handleInputChange}
+                      className="w-full bg-[#1e1511] border border-white/10 rounded-xl px-4 py-3.5 text-[#e5e2e0] focus:border-primary focus:outline-none transition-colors"
+                    >
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="More than 3">More than 3</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label htmlFor="eggPreference" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-2">
+                      Egg Preference *
+                    </label>
+                    <select
+                      id="eggPreference"
+                      name="eggPreference"
+                      value={formData.eggPreference}
+                      onChange={handleInputChange}
+                      className="w-full bg-[#1e1511] border border-white/10 rounded-xl px-4 py-3.5 text-[#e5e2e0] focus:border-primary focus:outline-none transition-colors"
+                    >
+                      <option value="Eggless">Eggless</option>
+                      <option value="With Egg">With Egg</option>
+                    </select>
+                  </div>
+                </div>
+
+                {/* 5. Is this a surprise order? */}
+                <div>
+                  <label htmlFor="isSurprise" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-2">
+                    Is this a surprise order? *
+                  </label>
+                  <select
+                    id="isSurprise"
+                    name="isSurprise"
+                    value={formData.isSurprise}
+                    onChange={handleInputChange}
+                    className="w-full bg-[#1e1511] border border-white/10 rounded-xl px-4 py-3.5 text-[#e5e2e0] focus:border-primary focus:outline-none transition-colors"
+                  >
+                    <option value="No">No</option>
+                    <option value="Yes">Yes</option>
+                  </select>
+                </div>
+
+                {/* 6. Cake Details / Message */}
                 <div>
                   <label htmlFor="message" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-2">
-                    Message / Cake Details
+                    Message / Cake Details *
                   </label>
                   <textarea
                     id="message"
                     name="message"
-                    rows={4}
+                    rows={3}
                     value={formData.message}
                     onChange={handleInputChange}
+                    className={`w-full bg-white/5 border ${errors.message ? 'border-red-500' : 'border-white/10'} rounded-xl px-4 py-3 text-[#e5e2e0] placeholder-[#e5e2e0]/20 focus:border-primary focus:outline-none transition-colors resize-none`}
+                    placeholder="Flavor, theme description, frosting style, custom message details..."
+                  />
+                  {errors.message && <p className="text-red-400 text-xs mt-1">{errors.message}</p>}
+                </div>
+
+                {/* 7. Special Instructions */}
+                <div>
+                  <label htmlFor="specialInstructions" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-2">
+                    Special Instructions (Optional)
+                  </label>
+                  <textarea
+                    id="specialInstructions"
+                    name="specialInstructions"
+                    rows={2}
+                    value={formData.specialInstructions}
+                    onChange={handleInputChange}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[#e5e2e0] placeholder-[#e5e2e0]/20 focus:border-primary focus:outline-none transition-colors resize-none"
-                    placeholder="Explain your customized design requirements (flavor, weight, date)..."
+                    placeholder="Allergies, packaging preferences, specific time note..."
                   />
                 </div>
 
-                <div className="pt-2">
+                {/* 8. Add-ons Checkboxes */}
+                <div className="space-y-2">
+                  <label className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60">
+                    Add-ons (Optional)
+                  </label>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-1">
+                    {['Candles', 'Cake Topper', 'Balloons/Decoration', 'Greeting Card', 'Chocolate Box', 'None'].map((addon) => (
+                      <label key={addon} className="flex items-center gap-2.5 cursor-pointer text-xs md:text-sm text-[#e5e2e0]/80 hover:text-white select-none">
+                        <input
+                          type="checkbox"
+                          checked={formData.addOns.includes(addon)}
+                          onChange={() => handleCheckboxChange(addon)}
+                          className="accent-primary w-4 h-4 rounded border-white/10 cursor-pointer"
+                        />
+                        {addon}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 9. Submit Button */}
+                <div className="pt-4">
                   <button
                     type="submit"
-                    className="w-full bg-primary text-on-primary font-semibold py-3.5 rounded-full hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2"
+                    className="w-full bg-primary text-on-primary font-semibold py-3.5 rounded-full hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <Send size={14} />
-                    Send Enquiry
+                    Send Enquiry on WhatsApp
                   </button>
                 </div>
               </form>
