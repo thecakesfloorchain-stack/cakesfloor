@@ -103,7 +103,7 @@ function App() {
   }, [introCompleted]);
 
   return (
-    <Router basename="/cakesfloor">
+    <Router basename={import.meta.env.BASE_URL}>
       <ScrollToTop />
       {/* 1. The lightweight Intro Animation overlay */}
       {!introCompleted && (
