@@ -663,13 +663,13 @@ export const Contact: React.FC = () => {
       <section className="max-w-7xl mx-auto px-6 pt-10">
         <div className="h-[450px] w-full rounded-3xl overflow-hidden border border-white/5 shadow-2xl relative bg-white/5">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3719.467417066922!2d80.1874254!3d21.1736173!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a2b63ab3aa37227%3A0xe54d24f0e4701ee6!2sMadhur+Bakery!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+            src="https://maps.google.com/maps?q=The%20Cakes%20Floor%2C%20near%20Sai%20Mandir%2C%20Khat%20Road%2C%20Bhandara&t=&z=16&ie=UTF8&iwloc=A&output=embed"
             width="100%"
             height="100%"
             style={{ border: 0 }}
             allowFullScreen
             loading="lazy"
-            title="Madhur Bakery Bhandara Map Location"
+            title="The Cakes Floor Bhandara Map Location"
           />
         </div>
       </section>
