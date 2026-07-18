@@ -4,6 +4,73 @@ import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 import { ArrowRight, ArrowLeft, Star, Clock, Heart, Award, Compass } from 'lucide-react';
 import { menuItems } from '../data/menu';
+import { SEO } from '../components/SEO';
+
+const homeJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Bakery",
+      "@id": "https://thecakesfloor.in/#bhandara",
+      "name": "The Cakes Floor",
+      "image": "https://thecakesfloor.in/images/aboutus-img.webp",
+      "telephone": "+91 78873 24373",
+      "url": "https://thecakesfloor.in/",
+      "priceRange": "₹₹",
+      "servesCuisine": ["Bakery", "Cakes", "Fast Food"],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Zilla Parishad Square, Takiya Ward, Near Sai Mandir, Near Ganeshpur",
+        "addressLocality": "Bhandara",
+        "addressRegion": "Maharashtra",
+        "postalCode": "441904",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 21.1736173,
+        "longitude": 80.1874254
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "10:00",
+        "closes": "22:30"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": 4.1,
+        "reviewCount": 697
+      },
+      "sameAs": ["https://www.instagram.com/thecakesfloor"]
+    },
+    {
+      "@type": "Bakery",
+      "@id": "https://thecakesfloor.in/#lakhani",
+      "name": "The Cakes Floor - Lakhani Outlet",
+      "image": "https://thecakesfloor.in/images/aboutus-img2.webp",
+      "telephone": "+91 78873 24373",
+      "url": "https://thecakesfloor.in/",
+      "priceRange": "₹₹",
+      "servesCuisine": ["Bakery", "Cakes", "Fast Food"],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Gangotri Building, Murmadi",
+        "addressLocality": "Lakhani",
+        "addressRegion": "Maharashtra",
+        "postalCode": "441804",
+        "addressCountry": "IN"
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        "opens": "10:00",
+        "closes": "22:30"
+      },
+      "sameAs": ["https://www.instagram.com/thecakesfloor"]
+    }
+  ]
+};
 
 export const Home: React.FC = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -156,6 +223,12 @@ export const Home: React.FC = () => {
 
   return (
     <div ref={containerRef} className="overflow-hidden">
+      <SEO 
+        title="The Cakes Floor | Premium Artisanal Cakes & Bakery in Bhandara" 
+        description="Indulge in Bhandara's finest 100% vegetarian bakery. Order custom birthday & wedding cakes, fresh pastries, hot savories, pizzas, and desserts. Visit our Bhandara and Lakhani outlets today." 
+        path="/" 
+        jsonLd={homeJsonLd} 
+      />
       {/* 1. Hero Section */}
       <section className="relative h-[calc(100vh-54px)] flex items-center pt-16 md:pt-24 overflow-hidden bg-[#0c0c0c]">
         {/* Background Slide (Uses absolute images inside animated motion containers for proper LCP optimization) */}
@@ -175,7 +248,7 @@ export const Home: React.FC = () => {
           >
             <img 
               src={`${import.meta.env.BASE_URL}${slides[currentSlide].image.replace(/^\//, '')}`} 
-              alt="" 
+              alt={slides[currentSlide].badge} 
               className="w-full h-full object-cover"
               loading={currentSlide === 0 ? "eager" : "lazy"}
               fetchPriority={currentSlide === 0 ? "high" : "auto"}
@@ -309,7 +382,7 @@ export const Home: React.FC = () => {
             <div className="w-full h-[360px] md:h-[500px] rounded-2xl overflow-hidden shadow-[0_12px_32px_rgba(0,0,0,0.15)] border border-neutral-350 bg-white/20 transition-transform duration-500 hover:scale-105">
               <img 
                 src={`${import.meta.env.BASE_URL}images/teaser-cake-1.webp`} 
-                alt="Butterfly Custom Cake" 
+                alt="Custom butterfly theme fondant cake by The Cakes Floor Bhandara" 
                 className="w-full h-full object-cover"
                 loading="lazy"
                 decoding="async"
@@ -319,7 +392,7 @@ export const Home: React.FC = () => {
             <div className="w-full h-[360px] md:h-[500px] rounded-2xl overflow-hidden shadow-[0_12px_32px_rgba(0,0,0,0.15)] border border-neutral-350 bg-white/20 transition-transform duration-500 hover:scale-105">
               <img 
                 src={`${import.meta.env.BASE_URL}images/teaser-cake-2.webp`} 
-                alt="Superhero Avengers Custom Cake" 
+                alt="Handcrafted Avengers superhero theme cake for kids birthday" 
                 className="w-full h-full object-cover"
                 loading="lazy"
                 decoding="async"
@@ -329,7 +402,7 @@ export const Home: React.FC = () => {
             <div className="w-full h-[360px] md:h-[500px] rounded-2xl overflow-hidden shadow-[0_12px_32px_rgba(0,0,0,0.15)] border border-neutral-350 bg-white/20 transition-transform duration-500 hover:scale-105">
               <img 
                 src={`${import.meta.env.BASE_URL}images/teaser-cake-3.webp`} 
-                alt="Lamborghini Sports Car Custom Cake" 
+                alt="Premium 3D sports car themed birthday cake" 
                 className="w-full h-full object-cover"
                 loading="lazy"
                 decoding="async"
@@ -386,7 +459,7 @@ export const Home: React.FC = () => {
                 <div className="h-48 w-full overflow-hidden relative bg-neutral-900 border-b border-white/5">
                   <img 
                     src={`${import.meta.env.BASE_URL}${item.image.replace(/^\//, '')}`} 
-                    alt={item.name} 
+                    alt={`${item.name} - The Cakes Floor Signature Selection`} 
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
                     decoding="async"
@@ -548,7 +621,7 @@ export const Home: React.FC = () => {
             <div className="relative w-full max-w-[580px] aspect-[1000/590] overflow-hidden select-none border border-neutral-100 shadow-[0_8px_30px_rgba(0,0,0,0.02)]">
               <img 
                 src={`${import.meta.env.BASE_URL}images/instagram-profile.webp`} 
-                alt="The Cakes Floor Instagram Profile" 
+                alt="The Cakes Floor Instagram feed and latest custom cake designs social page" 
                 className="w-full h-full object-cover"
                 loading="lazy"
                 decoding="async"

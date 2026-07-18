@@ -2,6 +2,7 @@ import React from 'react';
 import { Star, MessageSquare, X } from 'lucide-react';
 import { reviews, reviewsSummary } from '../data/reviews';
 import type { Review } from '../data/reviews';
+import { SEO } from '../components/SEO';
 
 interface WhiteBoxProps {
   heading: string;
@@ -144,6 +145,11 @@ export const Reviews: React.FC = () => {
 
   return (
     <div className="pt-24 pb-16 bg-[#0c0c0c] min-h-screen">
+      <SEO 
+        title="Customer Reviews | The Cakes Floor Bhandara (4.1★, 697+ reviews)" 
+        description="Read customer reviews and testimonials about The Cakes Floor in Bhandara. Discover why our bakery is rated 4.1 stars based on over 697 verified Google reviews." 
+        path="/reviews" 
+      />
       {/* Combined Section: Header + Google Rating Summary */}
       <section className="py-16 bg-gradient-to-b from-[#181817] to-background border-b border-white/5 relative" style={{ contentVisibility: 'auto', containIntrinsicSize: 'auto 400px' }}>
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -202,7 +208,7 @@ export const Reviews: React.FC = () => {
         <div className="absolute inset-0 z-0 bg-[#0c0c0c]">
           <img 
             src={`${import.meta.env.BASE_URL}images/review-bg-1.webp`} 
-            alt="Review Background 1" 
+            alt="Beautiful custom cake preparation and ingredients background" 
             loading="eager"
             fetchPriority="high"
             decoding="async"
@@ -256,7 +262,7 @@ export const Reviews: React.FC = () => {
         <div className="absolute inset-0 z-0 bg-[#0c0c0c]">
           <img 
             src={`${import.meta.env.BASE_URL}images/review-bg-2.webp`} 
-            alt="Review Background 2" 
+            alt="Artisanal bakery and cake styling background image" 
             loading="lazy"
             decoding="async"
             width="1920"
@@ -370,7 +376,7 @@ export const Reviews: React.FC = () => {
         <div className="absolute inset-0 z-0 bg-[#0c0c0c]">
           <img 
             src={`${import.meta.env.BASE_URL}images/review-bg-4.webp`} 
-            alt="Review Background 4" 
+            alt="Freshly baked cake slices background image" 
             loading="lazy"
             decoding="async"
             width="1920"

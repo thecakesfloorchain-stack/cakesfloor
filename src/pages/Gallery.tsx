@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
+import { SEO } from '../components/SEO';
 
 // Optimized WebP image assets from the public folder
 const galleryImages = [
@@ -30,6 +31,33 @@ const galleryImages = [
   '/images/gallery/gallery-cake-24.webp',
 ];
 
+const galleryAltTexts = [
+  "Custom chocolate birthday cake with elegant gold dust and premium chocolate toppings",
+  "Elegant multi-tier wedding cake decorated with soft pastel rose petals and fine fondant",
+  "Colorful cartoon character themed birthday cake for kids birthday celebrations",
+  "Premium fresh strawberry cream cake topped with glazed berries and chocolate curls",
+  "Classic black forest chocolate gateau with whipped cream stars and glazed cherries",
+  "Heart-shaped red velvet celebration cake with smooth pink cream cheese frosting",
+  "Bespoke tiered anniversary cake with rustic naked styling and rosemary accents",
+  "Butterscotch drip cake decorated with caramelized walnuts and gold piping details",
+  "Creative children's theme cake shaped like a playful blue toy car",
+  "Luxury dark chocolate drip cake topped with French macarons and chocolate shards",
+  "Traditional Indian fusion rasmalai cake garnished with pistachios and almond flakes",
+  "Playful baby shower cake in pastel pink and blue with edible baby booties",
+  "Fresh tropical mango mousse cake styled with mango slices and white curls",
+  "Delicate vanilla sponge anniversary cake with handmade white chocolate roses",
+  "Festive star themed tiered cake for new year celebrations",
+  "Bespoke engagement cake featuring intertwined gold wedding rings design",
+  "Zesty lemon curd celebration cake with toasted Swiss meringue peaks",
+  "Soft red velvet cake decorated with premium cream cheese frosting swirls",
+  "Custom photo print birthday cake with colorful sprinkles and chocolate borders",
+  "Gourmet pineapple gateau with caramelized slices and cherry highlights",
+  "Minimalist coffee mocha cream cake topped with dark chocolate beans",
+  "Stunning blue marble effect fondant cake with gold leaf detailing",
+  "Seasonal mixed fruit whipped cream cake loaded with kiwi, grapes, and orange slices",
+  "Premium dark chocolate truffle cake with golden sugar sprinkles"
+];
+
 export const Gallery: React.FC = () => {
 
   // Individual card item animation variants (fade-in & slide-up)
@@ -47,6 +75,11 @@ export const Gallery: React.FC = () => {
 
   return (
     <div className="pt-24 pb-16 bg-[#0c0c0c] min-h-screen">
+      <SEO 
+        title="Custom Cake Gallery | The Cakes Floor Bhandara" 
+        description="Browse our portfolio of custom-designed celebration cakes in Bhandara. See real photos of our birthday cakes, wedding cakes, baby shower cakes, and themed creations." 
+        path="/gallery" 
+      />
       {/* 1. Page Header */}
       <section className="py-16 bg-gradient-to-b from-[#181817] to-[#0c0c0c] border-b border-white/5 relative">
         <div className="max-w-4xl mx-auto px-6 text-center space-y-4">
@@ -77,7 +110,7 @@ export const Gallery: React.FC = () => {
               <div className="h-full w-full overflow-hidden">
                 <img
                   src={`${import.meta.env.BASE_URL}${src.replace(/^\//, '')}`}
-                  alt={`Signature Creation ${index + 1}`}
+                  alt={galleryAltTexts[index] || `Signature Creation ${index + 1}`}
                   className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   loading={index < 6 ? 'eager' : 'lazy'}
                   decoding="async"

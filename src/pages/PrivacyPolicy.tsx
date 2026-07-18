@@ -1,8 +1,15 @@
 import React from 'react';
+import { SEO } from '../components/SEO';
 
 export const PrivacyPolicy: React.FC = () => {
   return (
     <div className="pt-24 pb-16 bg-[#0c0c0c] min-h-screen">
+      <SEO 
+        title="Privacy Policy" 
+        description="Read the Privacy Policy of The Cakes Floor Bhandara to learn how we protect your personal ordering details and location data." 
+        path="/privacy-policy" 
+        robots="noindex, follow"
+      />
       {/* 1. Page Header */}
       <section className="py-16 bg-gradient-to-b from-[#181817] to-background border-b border-white/5 relative">
         <div className="max-w-4xl mx-auto px-6 text-center space-y-4">

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
 import { menuItems } from '../data/menu';
 import type { MenuItem } from '../data/menu';
+import { SEO } from '../components/SEO';
 
 export const Menu: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -63,6 +64,11 @@ export const Menu: React.FC = () => {
 
   return (
     <div className="pt-24 pb-16">
+      <SEO 
+        title="Cake & Bakery Menu | The Cakes Floor Bhandara" 
+        description="Explore our delicious menu of custom cakes, soft pastries, cheesecakes, rasmalai cakes, paneer burgers, paneer tikka pizzas, sandwiches, and premium beverages." 
+        path="/menu" 
+      />
       {/* 1. Page Header */}
       <section className="relative py-24 overflow-hidden border-b border-white/5 bg-gradient-to-b from-[#181817] to-background">
 
@@ -147,7 +153,7 @@ export const Menu: React.FC = () => {
                 <div className="h-44 w-full overflow-hidden relative bg-neutral-900 border-b border-white/5">
                   <img 
                     src={`${import.meta.env.BASE_URL}${item.image.replace(/^\//, '')}`} 
-                    alt={item.name} 
+                    alt={`${item.name} - The Cakes Floor Premium Selection`} 
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
                   />

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import Lenis from 'lenis';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
@@ -103,32 +104,34 @@ function App() {
   }, [introCompleted]);
 
   return (
-    <Router basename={import.meta.env.BASE_URL}>
-      <ScrollToTop />
-      {/* 1. The lightweight Intro Animation overlay */}
-      {!introCompleted && (
-        <IntroAnimation onComplete={() => setIntroCompleted(true)} />
-      )}
-      
-      {/* 2. Main Website Wrapper (allowed to render in the background, locked from scroll if not completed) */}
-      <div className={introCompleted ? 'opacity-100 min-h-screen' : 'h-screen overflow-hidden opacity-100'}>
-        <Navbar introCompleted={introCompleted} />
-        <main className="min-h-screen">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/menu" element={<Menu />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/reviews" element={<Reviews />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms-of-service" element={<TermsOfService />} />
-          </Routes>
-        </main>
-        <Footer />
-        <FloatingCTA />
-      </div>
-    </Router>
+    <HelmetProvider>
+      <Router basename={import.meta.env.BASE_URL}>
+        <ScrollToTop />
+        {/* 1. The lightweight Intro Animation overlay */}
+        {!introCompleted && (
+          <IntroAnimation onComplete={() => setIntroCompleted(true)} />
+        )}
+        
+        {/* 2. Main Website Wrapper (allowed to render in the background, locked from scroll if not completed) */}
+        <div className={introCompleted ? 'opacity-100 min-h-screen' : 'h-screen overflow-hidden opacity-100'}>
+          <Navbar introCompleted={introCompleted} />
+          <main className="min-h-screen">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/menu" element={<Menu />} />
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/reviews" element={<Reviews />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms-of-service" element={<TermsOfService />} />
+            </Routes>
+          </main>
+          <Footer />
+          <FloatingCTA />
+        </div>
+      </Router>
+    </HelmetProvider>
   );
 }
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { MapPin, Phone, Mail, Clock, Send, Compass } from 'lucide-react';
+import { SEO } from '../components/SEO';
 
 export const Contact: React.FC = () => {
   const [isOpenNow, setIsOpenNow] = useState<boolean>(false);
@@ -225,6 +226,11 @@ export const Contact: React.FC = () => {
 
   return (
     <div className="pt-24 pb-16">
+      <SEO 
+        title="Contact Us & Order Cakes | The Cakes Floor Bhandara" 
+        description="Get in touch with The Cakes Floor in Bhandara. Order custom birthday & wedding cakes on WhatsApp, get directions to our Bhandara main branch & Lakhani branch, or contact our support." 
+        path="/contact" 
+      />
       {/* 1. Page Header */}
       <section className="py-16 bg-gradient-to-b from-[#181817] to-background border-b border-white/5 relative">
         <div className="max-w-4xl mx-auto px-6 text-center space-y-4">

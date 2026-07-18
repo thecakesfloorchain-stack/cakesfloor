@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import gsap from 'gsap';
 import { Award, ShieldCheck, Smile } from 'lucide-react';
+import { SEO } from '../components/SEO';
 
 export const About: React.FC = () => {
   useEffect(() => {
@@ -27,6 +28,11 @@ export const About: React.FC = () => {
 
   return (
     <div className="pt-24 pb-16">
+      <SEO 
+        title="Our Story | The Cakes Floor Bhandara" 
+        description="Learn about The Cakes Floor, Bhandara's premium pure vegetarian bakery. Discover our baking philosophy, strict hygiene standards, and how our pastry chefs handcraft every cake, bread, and snack with love." 
+        path="/about" 
+      />
       {/* 1. Page Header */}
       <section className="py-16 bg-gradient-to-b from-[#181817] to-background border-b border-white/5 relative">
         <div className="max-w-4xl mx-auto px-6 text-center space-y-4">
@@ -62,7 +68,7 @@ export const About: React.FC = () => {
         <div className="relative h-[400px] lg:h-[500px] rounded-2xl overflow-hidden border border-white/5 shadow-2xl bg-neutral-900">
           <img
             src={`${import.meta.env.BASE_URL}images/aboutus-img.webp`}
-            alt="The Cakes Floor Coffee Area"
+            alt="The Cakes Floor bakery cafe interior seating and coffee area in Bhandara"
             className="w-full h-full object-cover"
             loading="eager"
             decoding="async"
@@ -128,7 +134,7 @@ export const About: React.FC = () => {
           <div className="relative h-[400px] lg:h-[500px] rounded-2xl overflow-hidden border border-white/5 shadow-2xl bg-neutral-900">
             <img
               src={`${import.meta.env.BASE_URL}images/aboutus-img2.webp`}
-              alt="The Cakes Floor Signage Wall"
+              alt="The Cakes Floor premium bakery wall signage decor"
               className="w-full h-full object-cover"
               loading="eager"
               decoding="async"
