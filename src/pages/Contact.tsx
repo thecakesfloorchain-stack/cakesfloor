@@ -450,6 +450,7 @@ export const Contact: React.FC = () => {
                       <option value="Self-Pickup" className="bg-[#1e1511] text-[#e5e2e0]">Self-Pickup</option>
                       <option value="Delivery" className="bg-[#1e1511] text-[#e5e2e0]">Delivery</option>
                     </select>
+                    <p className="text-[10px] text-[#e5e2e0]/40 mt-1">Select "Delivery" to enter your address details</p>
                   </div>
 
                   <div>
