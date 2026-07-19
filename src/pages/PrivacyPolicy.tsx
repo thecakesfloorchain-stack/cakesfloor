@@ -62,7 +62,7 @@ export const PrivacyPolicy: React.FC = () => {
             <li>Instagram and WhatsApp — if you choose to contact us through these platforms, their respective privacy policies apply</li>
           </ul>
           <p>
-            We do not currently use analytics or advertising tracking tools on this site. (If you add Google Analytics or similar later, this section should be updated.)
+            We do not currently use analytics or advertising tracking tools on this site.
           </p>
         </div>
 
@@ -83,7 +83,7 @@ export const PrivacyPolicy: React.FC = () => {
         <div className="space-y-4">
           <h2 className="font-display text-2xl font-semibold text-on-surface">Cookies</h2>
           <p>
-            This website does not currently use tracking cookies. (Update this if you add analytics, ads, or a cart/login system later.)
+            This website does not currently use tracking cookies.
           </p>
         </div>
 
