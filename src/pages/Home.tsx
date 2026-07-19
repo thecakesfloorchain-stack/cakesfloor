@@ -40,7 +40,7 @@ const homeJsonLd = {
       "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": 4.1,
-        "reviewCount": 697
+        "reviewCount": 700
       },
       "sameAs": ["https://www.instagram.com/thecakesfloor"]
     },

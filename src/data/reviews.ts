@@ -148,5 +148,5 @@ export const reviews: Review[] = [
 
 export const reviewsSummary = {
   rating: 4.1,
-  totalReviews: 697
+  totalReviews: 700
 };

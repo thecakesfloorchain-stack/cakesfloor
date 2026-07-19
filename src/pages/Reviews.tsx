@@ -146,8 +146,8 @@ export const Reviews: React.FC = () => {
   return (
     <div className="pt-24 pb-16 bg-[#0c0c0c] min-h-screen">
       <SEO 
-        title="Customer Reviews | The Cakes Floor Bhandara (4.1★, 697+ reviews)" 
-        description="Read customer reviews and testimonials about The Cakes Floor in Bhandara. Discover why our bakery is rated 4.1 stars based on over 697 verified Google reviews." 
+        title="Customer Reviews | The Cakes Floor Bhandara (4.1★, 700+ reviews)" 
+        description="Read customer reviews and testimonials about The Cakes Floor in Bhandara. Discover why our bakery is rated 4.1 stars based on over 700 verified Google reviews." 
         path="/reviews" 
       />
       {/* Combined Section: Header + Google Rating Summary */}
