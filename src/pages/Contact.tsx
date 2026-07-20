@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { MapPin, Phone, Mail, Clock, Send, Compass } from 'lucide-react';
 import { SEO } from '../components/SEO';
 
 export const Contact: React.FC = () => {
   const [isOpenNow, setIsOpenNow] = useState<boolean>(false);
-  const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -202,7 +200,6 @@ export const Contact: React.FC = () => {
 
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
 
-    setFormSubmitted(true);
     setFormData({
       name: '',
       phone: '',
@@ -345,28 +342,7 @@ export const Contact: React.FC = () => {
           <div className="glass-card p-8 rounded-3xl space-y-6">
             <h3 className="font-display text-2xl font-bold text-left text-on-surface">Cake Enquiry Form</h3>
 
-            {formSubmitted ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="py-12 text-center space-y-4"
-              >
-                <div className="w-12 h-12 rounded-full bg-primary/15 border border-primary/20 text-primary flex items-center justify-center mx-auto text-xl font-bold">
-                  ✓
-                </div>
-                <h4 className="font-display text-lg font-bold text-[#e5e2e0]">Enquiry Sent!</h4>
-                <p className="font-body text-xs text-[#e5e2e0]/60 max-w-sm mx-auto leading-relaxed">
-                  Thank you for contacting The Cakes Floor. Our baking team will get back to you shortly on your phone number.
-                </p>
-                <button
-                  onClick={() => setFormSubmitted(false)}
-                  className="text-primary hover:underline text-xs font-semibold uppercase tracking-wider mt-4"
-                >
-                  Send another message
-                </button>
-              </motion.div>
-            ) : (
-              <form onSubmit={handleSubmit} noValidate className="space-y-5 text-left font-body text-sm">
+            <form onSubmit={handleSubmit} noValidate className="space-y-5 text-left font-body text-sm">
                 {/* 1. Name & Phone & Alternate Phone */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -661,8 +637,7 @@ export const Contact: React.FC = () => {
                   </button>
                 </div>
               </form>
-            )}
-          </div>
+            </div>
         </div>
       </section>
 
