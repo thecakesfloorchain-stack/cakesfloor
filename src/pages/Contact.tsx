@@ -22,6 +22,17 @@ export const Contact: React.FC = () => {
     timeSlot: 'Morning (9am–12pm)',
     isSurprise: 'No',
     addOns: [] as string[],
+    // Chocolates details
+    chocolateType: 'Dark',
+    chocolateQty: '250g',
+    chocolatePkg: 'Box',
+    chocolateMsg: '',
+    chocolateAllergy: '',
+    // Flower Bouquet details
+    flowerType: 'Rose',
+    flowerColor: 'Red',
+    flowerSize: 'Medium',
+    flowerWrap: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -164,12 +175,12 @@ export const Contact: React.FC = () => {
     lines.push(`Name: ${formData.name.trim()}`);
     lines.push(`Phone: ${formData.phone.trim()}`);
     if (formData.alternatePhone.trim()) {
-      lines.push(`Alternate Phone: ${formData.alternatePhone.trim()}`);
+      lines.push(`Alt Phone: ${formData.alternatePhone.trim()}`);
     }
-    lines.push(`Cake Details: ${formData.message.trim()}`);
+    lines.push(`Cake: ${formData.message.trim()}`);
     lines.push(`Weight: ${formData.weight}`);
-    lines.push(`Quantity: ${formData.quantity}`);
-    lines.push(`Egg Preference: ${formData.eggPreference}`);
+    lines.push(`Qty: ${formData.quantity}`);
+    lines.push(`Egg Pref: ${formData.eggPreference}`);
     
     if (formData.nameOnCake.trim()) {
       lines.push(`Name on Cake: ${formData.nameOnCake.trim()}`);
@@ -177,22 +188,41 @@ export const Contact: React.FC = () => {
     
     const addonsStr = formData.addOns.length > 0 ? formData.addOns.join(', ') : 'None';
     lines.push(`Add-ons: ${addonsStr}`);
+
+    if (formData.addOns.includes('Chocolates')) {
+      lines.push(`*Choc:* ${formData.chocolateType}, ${formData.chocolateQty}, ${formData.chocolatePkg}`);
+      if (formData.chocolateMsg.trim()) {
+        lines.push(`Choc Msg: ${formData.chocolateMsg.trim()}`);
+      }
+      if (formData.chocolateAllergy.trim()) {
+        lines.push(`Choc Allergy: ${formData.chocolateAllergy.trim()}`);
+      }
+    }
+
+    if (formData.addOns.includes('Flower Bouquet')) {
+      lines.push(`*Flowers:* ${formData.flowerType}, ${formData.flowerColor}, ${formData.flowerSize}`);
+      if (formData.flowerWrap.trim()) {
+        lines.push(`Flower Wrap: ${formData.flowerWrap.trim()}`);
+      }
+    }
     
     lines.push(`Order Type: ${formData.orderType}`);
     if (formData.orderType === 'Delivery') {
-      lines.push(`Delivery Address: ${formData.deliveryAddress.trim()}`);
-      lines.push(`Pin Code/Area: ${formData.pincode.trim()}`);
+      lines.push(`Address: ${formData.deliveryAddress.trim()}`);
+      lines.push(`Pincode: ${formData.pincode.trim()}`);
     }
     
     if (formData.preferredDate) {
-      lines.push(`Preferred Date: ${formData.preferredDate}`);
+      lines.push(`Date: ${formData.preferredDate}`);
     }
-    lines.push(`Preferred Time: ${formData.timeSlot}`);
-    lines.push(`Surprise Order: ${formData.isSurprise}`);
+    lines.push(`Time: ${formData.timeSlot}`);
+    lines.push(`Surprise: ${formData.isSurprise}`);
     
     if (formData.specialInstructions.trim()) {
-      lines.push(`Special Instructions: ${formData.specialInstructions.trim()}`);
+      lines.push(`Instructions: ${formData.specialInstructions.trim()}`);
     }
+
+    lines.push('_If you\'d like, please feel free to send any reference images of the flower bouquet or cake design here._');
     
     const messageTemplate = lines.join('\n');
     const encodedMessage = encodeURIComponent(messageTemplate);
@@ -217,6 +247,15 @@ export const Contact: React.FC = () => {
       timeSlot: 'Morning (9am–12pm)',
       isSurprise: 'No',
       addOns: [],
+      chocolateType: 'Dark',
+      chocolateQty: '250g',
+      chocolatePkg: 'Box',
+      chocolateMsg: '',
+      chocolateAllergy: '',
+      flowerType: 'Rose',
+      flowerColor: 'Red',
+      flowerSize: 'Medium',
+      flowerWrap: '',
     });
     setErrors({});
   };
@@ -607,12 +646,12 @@ export const Contact: React.FC = () => {
                 </div>
 
                 {/* 8. Add-ons Checkboxes */}
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <label className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60">
                     Add-ons (Optional)
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-1">
-                    {['Candles', 'Cake Topper', 'Balloons/Decoration', 'Greeting Card', 'Chocolate Box', 'None'].map((addon) => (
+                    {['Candles', 'Cake Topper', 'Balloons/Decoration', 'Greeting Card', 'Chocolates', 'Flower Bouquet', 'None'].map((addon) => (
                       <label key={addon} className="flex items-center gap-2.5 cursor-pointer text-xs md:text-sm text-[#e5e2e0]/80 hover:text-white select-none">
                         <input
                           type="checkbox"
@@ -624,10 +663,186 @@ export const Contact: React.FC = () => {
                       </label>
                     ))}
                   </div>
+
+                  {/* Chocolates Conditional Fields */}
+                  {formData.addOns.includes('Chocolates') && (
+                    <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-4 animate-in fade-in duration-200 mt-3">
+                      <h4 className="text-xs uppercase tracking-wider text-primary font-semibold">Chocolates Details</h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div>
+                          <label htmlFor="chocolateType" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-1">
+                            Type
+                          </label>
+                          <select
+                            id="chocolateType"
+                            name="chocolateType"
+                            value={formData.chocolateType}
+                            onChange={handleInputChange}
+                            className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-[#e5e2e0] text-xs focus:border-primary focus:outline-none cursor-pointer"
+                          >
+                            <option value="Dark" className="bg-[#1e1511]">Dark</option>
+                            <option value="Milk" className="bg-[#1e1511]">Milk</option>
+                            <option value="White" className="bg-[#1e1511]">White</option>
+                            <option value="Assorted" className="bg-[#1e1511]">Assorted</option>
+                          </select>
+                        </div>
+
+                        <div>
+                          <label htmlFor="chocolateQty" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-1">
+                            Quantity
+                          </label>
+                          <select
+                            id="chocolateQty"
+                            name="chocolateQty"
+                            value={formData.chocolateQty}
+                            onChange={handleInputChange}
+                            className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-[#e5e2e0] text-xs focus:border-primary focus:outline-none cursor-pointer"
+                          >
+                            <option value="250g" className="bg-[#1e1511]">250g</option>
+                            <option value="500g" className="bg-[#1e1511]">500g</option>
+                            <option value="1kg" className="bg-[#1e1511]">1kg</option>
+                            <option value="12 Pcs" className="bg-[#1e1511]">12 Pcs</option>
+                            <option value="24 Pcs" className="bg-[#1e1511]">24 Pcs</option>
+                          </select>
+                        </div>
+
+                        <div>
+                          <label htmlFor="chocolatePkg" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-1">
+                            Packaging
+                          </label>
+                          <select
+                            id="chocolatePkg"
+                            name="chocolatePkg"
+                            value={formData.chocolatePkg}
+                            onChange={handleInputChange}
+                            className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-[#e5e2e0] text-xs focus:border-primary focus:outline-none cursor-pointer"
+                          >
+                            <option value="Box" className="bg-[#1e1511]">Box</option>
+                            <option value="Basket" className="bg-[#1e1511]">Basket</option>
+                            <option value="Loose wrapped" className="bg-[#1e1511]">Loose wrapped</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                          <label htmlFor="chocolateMsg" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-1">
+                            Personalized Message (Optional)
+                          </label>
+                          <input
+                            type="text"
+                            id="chocolateMsg"
+                            name="chocolateMsg"
+                            value={formData.chocolateMsg}
+                            onChange={handleInputChange}
+                            className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-[#e5e2e0] text-xs placeholder-[#e5e2e0]/20 focus:border-primary focus:outline-none"
+                            placeholder="e.g. Happy Birthday"
+                          />
+                        </div>
+
+                        <div>
+                          <label htmlFor="chocolateAllergy" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-1">
+                            Allergy Preference (Optional)
+                          </label>
+                          <input
+                            type="text"
+                            id="chocolateAllergy"
+                            name="chocolateAllergy"
+                            value={formData.chocolateAllergy}
+                            onChange={handleInputChange}
+                            className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-[#e5e2e0] text-xs placeholder-[#e5e2e0]/20 focus:border-primary focus:outline-none"
+                            placeholder="e.g. No nuts"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Flower Bouquet Conditional Fields */}
+                  {formData.addOns.includes('Flower Bouquet') && (
+                    <div className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-4 animate-in fade-in duration-200 mt-3">
+                      <h4 className="text-xs uppercase tracking-wider text-primary font-semibold">Flower Bouquet Details</h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <div>
+                          <label htmlFor="flowerType" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-1">
+                            Flower Type
+                          </label>
+                          <select
+                            id="flowerType"
+                            name="flowerType"
+                            value={formData.flowerType}
+                            onChange={handleInputChange}
+                            className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-[#e5e2e0] text-xs focus:border-primary focus:outline-none cursor-pointer"
+                          >
+                            <option value="Rose" className="bg-[#1e1511]">Rose</option>
+                            <option value="Lily" className="bg-[#1e1511]">Lily</option>
+                            <option value="Mixed Seasonal" className="bg-[#1e1511]">Mixed Seasonal</option>
+                            <option value="Other" className="bg-[#1e1511]">Other</option>
+                          </select>
+                        </div>
+
+                        <div>
+                          <label htmlFor="flowerColor" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-1">
+                            Color Preference
+                          </label>
+                          <select
+                            id="flowerColor"
+                            name="flowerColor"
+                            value={formData.flowerColor}
+                            onChange={handleInputChange}
+                            className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-[#e5e2e0] text-xs focus:border-primary focus:outline-none cursor-pointer"
+                          >
+                            <option value="Red" className="bg-[#1e1511]">Red</option>
+                            <option value="Pink" className="bg-[#1e1511]">Pink</option>
+                            <option value="Yellow" className="bg-[#1e1511]">Yellow</option>
+                            <option value="White" className="bg-[#1e1511]">White</option>
+                            <option value="Mixed" className="bg-[#1e1511]">Mixed</option>
+                          </select>
+                        </div>
+
+                        <div>
+                          <label htmlFor="flowerSize" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-1">
+                            Size
+                          </label>
+                          <select
+                            id="flowerSize"
+                            name="flowerSize"
+                            value={formData.flowerSize}
+                            onChange={handleInputChange}
+                            className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-[#e5e2e0] text-xs focus:border-primary focus:outline-none cursor-pointer"
+                          >
+                            <option value="Small" className="bg-[#1e1511]">Small</option>
+                            <option value="Medium" className="bg-[#1e1511]">Medium</option>
+                            <option value="Large" className="bg-[#1e1511]">Large</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label htmlFor="flowerWrap" className="block text-xs uppercase tracking-wider text-[#e5e2e0]/60 mb-1">
+                          Wrapping/Ribbon Style (Optional)
+                        </label>
+                        <input
+                          type="text"
+                          id="flowerWrap"
+                          name="flowerWrap"
+                          value={formData.flowerWrap}
+                          onChange={handleInputChange}
+                          className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-[#e5e2e0] text-xs placeholder-[#e5e2e0]/20 focus:border-primary focus:outline-none"
+                          placeholder="e.g. Red satin ribbon with kraft paper"
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
 
+                {/* Italic Note */}
+                <p className="text-xs italic text-[#e5e2e0]/60 text-center pt-2">
+                  You can also send us reference images of the flower bouquet or cake design directly on WhatsApp after sending this enquiry.
+                </p>
+
                 {/* 9. Submit Button */}
-                <div className="pt-4">
+                <div className="pt-2">
                   <button
                     type="submit"
                     className="w-full bg-primary text-on-primary font-semibold py-3.5 rounded-full hover:brightness-110 active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer"
