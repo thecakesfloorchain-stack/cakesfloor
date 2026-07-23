@@ -29,6 +29,22 @@ const galleryImages = [
   '/images/gallery/gallery-cake-22.webp',
   '/images/gallery/gallery-cake-23.webp',
   '/images/gallery/gallery-cake-24.webp',
+  '/images/gallery/gallery-cake-25.webp',
+  '/images/gallery/gallery-cake-26.webp',
+  '/images/gallery/gallery-cake-27.webp',
+  '/images/gallery/gallery-cake-28.webp',
+  '/images/gallery/gallery-cake-29.webp',
+  '/images/gallery/gallery-cake-30.webp',
+  '/images/gallery/gallery-cake-31.webp',
+  '/images/gallery/gallery-cake-32.webp',
+  '/images/gallery/gallery-cake-33.webp',
+  '/images/gallery/gallery-cake-34.webp',
+  '/images/gallery/gallery-cake-35.webp',
+  '/images/gallery/gallery-cake-36.webp',
+  '/images/gallery/gallery-cake-37.webp',
+  '/images/gallery/gallery-cake-38.webp',
+  '/images/gallery/gallery-cake-39.webp',
+  '/images/gallery/gallery-cake-40.webp',
 ];
 
 const galleryAltTexts = [
@@ -55,7 +71,23 @@ const galleryAltTexts = [
   "Minimalist coffee mocha cream cake topped with dark chocolate beans",
   "Stunning blue marble effect fondant cake with gold leaf detailing",
   "Seasonal mixed fruit whipped cream cake loaded with kiwi, grapes, and orange slices",
-  "Premium dark chocolate truffle cake with golden sugar sprinkles"
+  "Premium dark chocolate truffle cake with golden sugar sprinkles",
+  "Custom white and blue 'We love You OUR Superman' birthday cake for husband & papa with photo banner bunting and gold leaf accents",
+  "Bespoke 2-tier floating white engagement cake with fresh flower arrangement and golden 'We're Engaged' topper",
+  "Stunning 2-tier pink engagement cake with illuminated acrylic flower separator and gold leaf details",
+  "Luxury 2-tier white pearl engagement cake with gold initials monogram and white rose bouquet",
+  "Enchanting Princess Sofia themed 2-tier purple birthday cake for girls with castle topper and butterflies",
+  "Artistic custom portrait birthday cake featuring 3D chocolate hair curls, red roses, and colorful chocolates",
+  "Vibrant 2-tier Candyland sweet treats theme birthday cake topped with donuts, lollipops, and ice cream cone",
+  "Grand 3-tier Disney Princesses birthday cake with Elsa, Anna, Ariel, and Belle figurines",
+  "Custom Spider-Man number 5 shaped birthday cake with detailed web piping for kids birthday party",
+  "Elegant pink marble effect birthday cake decorated with handcrafted sugar roses and gold leaf foliage",
+  "Twin celebration pastel rainbow cake set decorated with ice cream cones, popsicles, and rainbow arch",
+  "Playful 2-tier Jungle Safari animal themed 4th birthday cake with 3D lion, giraffe, and elephant figures",
+  "Creative white and blue birthday cake featuring a 3D girl floating with gold and blue balloon sphere bundle",
+  "Magical illuminated birthday cake with a girl on a fairy light swing, sugar flowers, and gold lettering",
+  "3D sculptured giant red rose flower birthday cake crafted with delicate edible sugar petals",
+  "Modern gold and white calendar date birthday cake with gold sphere toppers and torn gold foil accent"
 ];
 
 export const Gallery: React.FC = () => {
