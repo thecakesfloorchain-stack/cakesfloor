@@ -77,3 +77,15 @@ CREATE POLICY "Public Select Reward Redemptions" ON public.reward_redemptions FO
 
 DROP POLICY IF EXISTS "Public Insert Reward Redemptions" ON public.reward_redemptions;
 CREATE POLICY "Public Insert Reward Redemptions" ON public.reward_redemptions FOR INSERT WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Public Delete Customers" ON public.customers;
+CREATE POLICY "Public Delete Customers" ON public.customers FOR DELETE USING (true);
+
+DROP POLICY IF EXISTS "Public Delete Loyalty Cards" ON public.loyalty_cards;
+CREATE POLICY "Public Delete Loyalty Cards" ON public.loyalty_cards FOR DELETE USING (true);
+
+DROP POLICY IF EXISTS "Public Delete Stamp Logs" ON public.stamp_logs;
+CREATE POLICY "Public Delete Stamp Logs" ON public.stamp_logs FOR DELETE USING (true);
+
+DROP POLICY IF EXISTS "Public Delete Reward Redemptions" ON public.reward_redemptions;
+CREATE POLICY "Public Delete Reward Redemptions" ON public.reward_redemptions FOR DELETE USING (true);
