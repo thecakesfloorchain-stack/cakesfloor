@@ -637,15 +637,30 @@ export const LoyaltyScan: React.FC = () => {
               </div>
             </div>
 
-            {/* PIN Input */}
-            <div className="mb-5">
+            {/* Secure Anti-Autofill PIN Input */}
+            <div className="mb-5 relative">
               <input
-                type="password"
+                type="text"
+                inputMode="numeric"
+                pattern="[0-9]*"
                 maxLength={4}
                 value={enteredPin}
-                onChange={(e) => setEnteredPin(e.target.value)}
-                placeholder="Enter 4-Digit Staff PIN"
-                className="w-full text-center text-2xl tracking-[0.5em] font-mono py-3 bg-pink-50/50 border-2 border-pink-300 rounded-2xl focus:outline-none focus:border-pink-500"
+                onChange={(e) => {
+                  const val = e.target.value.replace(/\D/g, '');
+                  setEnteredPin(val);
+                }}
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="off"
+                spellCheck={false}
+                data-form-type="other"
+                data-lpignore="true"
+                data-1p-ignore="true"
+                placeholder="••••"
+                className="w-full text-center text-2xl tracking-[0.6em] font-mono py-3 bg-pink-50/50 border-2 border-pink-300 rounded-2xl focus:outline-none focus:border-pink-500 text-pink-600 font-bold selection:bg-transparent"
+                style={{
+                  WebkitTextSecurity: 'disc'
+                } as React.CSSProperties}
               />
             </div>
 
