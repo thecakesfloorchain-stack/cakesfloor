@@ -29,10 +29,11 @@ const ScrollToTop = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
 
-    // Track SPA pageviews in Google Analytics 4 (excluding private scan pages)
+    // Track SPA pageviews in Google Analytics 4 (excluding private loyalty scan pages)
     if (
       typeof window !== 'undefined' &&
       (window as any).gtag &&
+      !location.pathname.startsWith('/loyalty-stamp') &&
       !location.pathname.startsWith('/scan') &&
       !location.pathname.startsWith('/owner-portal')
     ) {
@@ -45,10 +46,11 @@ const ScrollToTop = () => {
   return null;
 };
 
-// Layout Manager Component to hide Navbar/Footer on hidden /scan and /owner-portal routes
+// Layout Manager Component to hide Navbar/Footer on hidden /loyalty-stamp and /owner-portal routes
 const AppLayout = () => {
   const location = useLocation();
   const isHiddenAppRoute =
+    location.pathname.startsWith('/loyalty-stamp') ||
     location.pathname.startsWith('/scan') ||
     location.pathname.startsWith('/owner-portal');
 
@@ -68,6 +70,7 @@ const AppLayout = () => {
           <Route path="/terms-of-service" element={<TermsOfService />} />
 
           {/* Hidden Loyalty System Routes */}
+          <Route path="/loyalty-stamp" element={<LoyaltyScan />} />
           <Route path="/scan" element={<LoyaltyScan />} />
           <Route path="/owner-portal" element={<OwnerPortal />} />
         </Routes>
