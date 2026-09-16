@@ -520,6 +520,29 @@ export const LoyaltyScan: React.FC = () => {
                   <ChevronRight className="w-5 h-5 text-amber-600 group-hover:translate-x-1 transition-transform" />
                 </a>
 
+                {/* Instagram Profile Link (Opens in New Tab) */}
+                <a
+                  href="https://www.instagram.com/thecakesfloor"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-between p-3.5 bg-gradient-to-r from-pink-50 to-purple-50 hover:from-pink-100 hover:to-purple-100 rounded-2xl border border-pink-200 transition-all font-bold text-pink-950 text-sm group"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-gradient-to-tr from-amber-500 via-rose-500 to-purple-600 text-white rounded-xl shadow-sm">
+                      <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <span>Explore Our Instagram Page</span>
+                      <p className="text-[11px] text-pink-700 font-normal">Follow @thecakesfloor for latest cake reels</p>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-5 h-5 text-pink-600 group-hover:translate-x-1 transition-transform" />
+                </a>
+
                 {/* Digital Menu Link (Opens in New Tab) */}
                 <a
                   href="/menu"
