@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS public.customers (
 CREATE TABLE IF NOT EXISTS public.loyalty_cards (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     customer_id UUID REFERENCES public.customers(id) ON DELETE CASCADE UNIQUE,
-    current_stamps INT DEFAULT 1 CHECK (current_stamps >= 0 AND current_stamps <= 4),
+    current_stamps INT DEFAULT 1 CHECK (current_stamps >= 0 AND current_stamps <= 5),
     total_rewards_earned INT DEFAULT 0,
     total_stamps_all_time INT DEFAULT 1,
     review_prompted BOOLEAN DEFAULT FALSE,

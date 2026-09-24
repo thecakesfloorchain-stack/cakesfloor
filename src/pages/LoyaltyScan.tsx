@@ -187,8 +187,8 @@ export const LoyaltyScan: React.FC = () => {
     setFailedPinCount(0);
 
     let newStamps = currentStamps + selectedStampQty;
-    if (newStamps >= 4) {
-      newStamps = 4;
+    if (newStamps >= 5) {
+      newStamps = 5; // Cap at 5 for reward unlock
     }
 
     setCurrentStamps(newStamps);
@@ -232,18 +232,18 @@ export const LoyaltyScan: React.FC = () => {
       }, 800);
     }
 
-    if (newStamps >= 4) {
+    if (newStamps >= 5) {
       setTimeout(() => {
         setShowRewardModal(true);
       }, 800);
     }
   };
 
-  // Handle Reward Redemption
+  // Handle Reward Redemption (Resets 5 stamps to 0/5)
   const handleRedeemReward = async () => {
     const newRewardsCount = totalRewards + 1;
     setTotalRewards(newRewardsCount);
-    setCurrentStamps(0);
+    setCurrentStamps(0); // Reset to 0
 
     localStorage.setItem(`cakes_stamps_${customerPhone}`, '0');
     localStorage.setItem(`cakes_rewards_${customerPhone}`, newRewardsCount.toString());
@@ -320,7 +320,7 @@ export const LoyaltyScan: React.FC = () => {
                   Join & Claim 1st Stamp!
                 </h2>
                 <p className="text-sm text-gray-600 mt-1">
-                  Buy 4 Pastries (₹50 each) ➔ Get 1 Free ₹50 Pastry!
+                  Buy 5 Pastries (₹50 each) ➔ Get 1 Free ₹50 Pastry!
                 </p>
               </div>
 
@@ -391,7 +391,7 @@ export const LoyaltyScan: React.FC = () => {
                 )}
               </div>
 
-              {/* The Main 4-Stamp Card */}
+              {/* The Main 5-Stamp Card */}
               <div className="bg-white/95 backdrop-blur-xl rounded-3xl p-6 shadow-2xl border-4 border-amber-300 relative overflow-hidden">
 
                 {/* Card Header */}
@@ -400,31 +400,31 @@ export const LoyaltyScan: React.FC = () => {
                     🧁 Pastry Loyalty Card
                   </span>
                   <h2 className="text-2xl font-black text-gray-900 font-['Outfit',sans-serif]">
-                    Buy 4 Pastries ➔ Get 1 Free!
+                    Buy 5 Pastries ➔ Get 1 Free!
                   </h2>
                   <p className="text-xs text-pink-600 font-bold mt-1">
                     Applicable on all ₹50 Pastries at The Cakes Floor
                   </p>
                 </div>
 
-                {/* 4 STAMP SLOTS GRID */}
-                <div className="grid grid-cols-2 gap-4 mb-6">
-                  {[1, 2, 3, 4].map((slotNum) => {
+                {/* 5 STAMP SLOTS GRID */}
+                <div className="grid grid-cols-3 gap-3 mb-6">
+                  {[1, 2, 3, 4, 5].map((slotNum) => {
                     const isStamped = slotNum <= currentStamps;
-                    const isRewardSlot = slotNum === 4;
+                    const isRewardSlot = slotNum === 5;
 
                     return (
                       <div
                         key={slotNum}
-                        className={`aspect-square rounded-2xl border-3 flex flex-col items-center justify-center p-3 relative transition-all transform ${
+                        className={`aspect-square rounded-2xl border-3 flex flex-col items-center justify-center p-2 relative transition-all transform ${
                           isStamped
                             ? 'bg-gradient-to-br from-pink-400 via-rose-500 to-amber-400 border-amber-300 text-white shadow-lg scale-105 rotate-1'
                             : isRewardSlot
-                            ? 'bg-amber-50 border-dashed border-amber-400 text-amber-600'
+                            ? 'bg-amber-50 border-dashed border-amber-400 text-amber-600 col-span-2 sm:col-span-1'
                             : 'bg-gray-50 border-dashed border-pink-200 text-gray-400'
                         }`}
                       >
-                        <span className={`absolute top-2 left-2 text-[10px] font-black px-2 py-0.5 rounded-full ${
+                        <span className={`absolute top-1.5 left-1.5 text-[9px] font-black px-1.5 py-0.5 rounded-full ${
                           isStamped ? 'bg-white/30 text-white' : 'bg-gray-200 text-gray-600'
                         }`}>
                           #{slotNum}
@@ -432,20 +432,20 @@ export const LoyaltyScan: React.FC = () => {
 
                         {isStamped ? (
                           <div className="text-center animate-pulse">
-                            <span className="text-3xl block">🧁</span>
-                            <span className="text-[11px] font-extrabold uppercase tracking-wide mt-1 text-white drop-shadow">
+                            <span className="text-2xl block">🧁</span>
+                            <span className="text-[10px] font-extrabold uppercase tracking-wide mt-0.5 text-white drop-shadow">
                               {isRewardSlot ? 'REWARD!' : 'COLLECTED'}
                             </span>
                           </div>
                         ) : isRewardSlot ? (
                           <div className="text-center">
-                            <Gift className="w-8 h-8 text-amber-500 mx-auto animate-bounce mb-1" />
-                            <span className="text-[10px] font-bold text-amber-700 uppercase">FREE PASTRY</span>
+                            <Gift className="w-7 h-7 text-amber-500 mx-auto animate-bounce mb-0.5" />
+                            <span className="text-[9px] font-bold text-amber-700 uppercase">FREE PASTRY</span>
                           </div>
                         ) : (
                           <div className="text-center">
-                            <span className="text-2xl opacity-40 block">🎂</span>
-                            <span className="text-[10px] font-semibold text-gray-600 mt-1">₹50 Pastry</span>
+                            <span className="text-xl opacity-40 block">🎂</span>
+                            <span className="text-[9px] font-semibold text-gray-600 mt-0.5">₹50 Pastry</span>
                           </div>
                         )}
                       </div>
@@ -457,18 +457,18 @@ export const LoyaltyScan: React.FC = () => {
                 <div className="mb-6">
                   <div className="flex justify-between text-xs font-bold text-gray-700 mb-1">
                     <span>Your Progress</span>
-                    <span>{currentStamps} of 4 Stamps</span>
+                    <span>{currentStamps} of 5 Stamps</span>
                   </div>
                   <div className="w-full bg-pink-100 h-3 rounded-full overflow-hidden p-0.5 border border-pink-200">
                     <div
                       className="bg-gradient-to-r from-pink-500 to-amber-400 h-full rounded-full transition-all duration-500"
-                      style={{ width: `${(currentStamps / 4) * 100}%` }}
+                      style={{ width: `${(currentStamps / 5) * 100}%` }}
                     ></div>
                   </div>
                 </div>
 
                 {/* Action Button */}
-                {currentStamps < 4 ? (
+                {currentStamps < 5 ? (
                   <button
                     onClick={() => setIsPinModalOpen(true)}
                     className="w-full py-4 bg-gradient-to-r from-amber-500 via-rose-500 to-pink-500 text-white font-extrabold text-lg rounded-2xl shadow-xl hover:shadow-amber-400/50 transform active:scale-95 transition-all flex items-center justify-center gap-2 border-2 border-white/40"
@@ -495,13 +495,13 @@ export const LoyaltyScan: React.FC = () => {
 
               </div>
 
-              {/* BOTTOM ACTION LINKS (Opening in New Tab for Menu & Website) */}
+              {/* BOTTOM ACTION LINKS */}
               <div className="bg-white/80 backdrop-blur-md rounded-3xl p-5 shadow-lg border border-pink-200 space-y-3">
                 <h4 className="text-xs font-extrabold uppercase text-gray-700 tracking-wider text-center mb-2">
                   Quick Actions
                 </h4>
 
-                {/* Google Review Button (Opens in New Tab) */}
+                {/* Google Review Button */}
                 <a
                   href={GOOGLE_REVIEW_URL}
                   target="_blank"
@@ -520,7 +520,7 @@ export const LoyaltyScan: React.FC = () => {
                   <ChevronRight className="w-5 h-5 text-amber-600 group-hover:translate-x-1 transition-transform" />
                 </a>
 
-                {/* Instagram Profile Link (Opens in New Tab) */}
+                {/* Instagram Profile Link */}
                 <a
                   href="https://www.instagram.com/thecakesfloor"
                   target="_blank"
@@ -543,7 +543,7 @@ export const LoyaltyScan: React.FC = () => {
                   <ChevronRight className="w-5 h-5 text-pink-600 group-hover:translate-x-1 transition-transform" />
                 </a>
 
-                {/* Digital Menu Link (Opens in New Tab) */}
+                {/* Digital Menu Link */}
                 <a
                   href="/menu"
                   target="_blank"
@@ -562,7 +562,7 @@ export const LoyaltyScan: React.FC = () => {
                   <ChevronRight className="w-5 h-5 text-rose-600 group-hover:translate-x-1 transition-transform" />
                 </a>
 
-                {/* Main Website Link (Opens in New Tab) */}
+                {/* Main Website Link */}
                 <a
                   href="/"
                   target="_blank"
@@ -642,19 +642,19 @@ export const LoyaltyScan: React.FC = () => {
               <label className="block text-[11px] font-bold text-gray-600 uppercase text-center mb-1.5">
                 Stamps To Add (1 Default)
               </label>
-              <div className="grid grid-cols-4 gap-2">
-                {[1, 2, 3, 4].map((qty) => (
+              <div className="grid grid-cols-5 gap-1.5">
+                {[1, 2, 3, 4, 5].map((qty) => (
                   <button
                     key={qty}
                     type="button"
                     onClick={() => setSelectedStampQty(qty)}
-                    className={`py-2 text-xs font-bold rounded-xl border transition-all ${
+                    className={`py-2 text-[11px] font-bold rounded-xl border transition-all ${
                       selectedStampQty === qty
                         ? 'bg-pink-500 text-white border-pink-500 shadow-md scale-105'
                         : 'bg-gray-50 text-gray-700 border-gray-200 hover:bg-gray-100'
                     }`}
                   >
-                    +{qty} Stamp
+                    +{qty}
                   </button>
                 ))}
               </div>
@@ -698,7 +698,7 @@ export const LoyaltyScan: React.FC = () => {
         </div>
       )}
 
-      {/* MODAL 2: 3rd STAMP GOOGLE REVIEW POPUP (Opens in New Tab) */}
+      {/* MODAL 2: 3rd STAMP GOOGLE REVIEW POPUP */}
       {showReviewModal && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border-4 border-pink-300 relative text-center">
@@ -743,7 +743,7 @@ export const LoyaltyScan: React.FC = () => {
         </div>
       )}
 
-      {/* MODAL 3: 4th STAMP REWARD UNLOCKED MODAL */}
+      {/* MODAL 3: 5th STAMP REWARD UNLOCKED MODAL */}
       {showRewardModal && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-center justify-center p-4">
           <div className="bg-gradient-to-b from-amber-100 via-white to-pink-50 rounded-3xl max-w-sm w-full p-6 shadow-2xl border-4 border-amber-400 relative text-center">

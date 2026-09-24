@@ -156,7 +156,7 @@ export const OwnerPortal: React.FC = () => {
   };
 
   const handleAddStampFromAdmin = async (phone: string, current: number) => {
-    const nextStamps = current >= 4 ? 4 : current + 1;
+    const nextStamps = current >= 5 ? 5 : current + 1;
     setCustomers((prev) =>
       prev.map((item) => (item.phone === phone ? { ...item, current_stamps: nextStamps } : item))
     );
@@ -183,7 +183,7 @@ export const OwnerPortal: React.FC = () => {
     const dataToExport = customers.map((c) => ({
       'Customer Name': c.name,
       'Mobile Number': c.phone,
-      'Current Stamps': `${c.current_stamps} / 4`,
+      'Current Stamps': `${c.current_stamps} / 5`,
       'Total Rewards Won': c.total_rewards,
       'Joined Date': c.created_at
     }));
@@ -420,7 +420,7 @@ export const OwnerPortal: React.FC = () => {
 
                             <td className="p-4">
                               <span className="inline-block px-3 py-1 bg-amber-500/20 text-amber-300 font-extrabold text-xs rounded-xl border border-amber-500/30">
-                                {cust.current_stamps} / 4 Stamps
+                                {cust.current_stamps} / 5 Stamps
                               </span>
                             </td>
 
